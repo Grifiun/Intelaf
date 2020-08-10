@@ -90,6 +90,17 @@ CREATE TABLE Compra(
   CONSTRAINT FK_Compra_Pedido FOREIGN KEY(codigo_pedido) REFERENCES Pedido(codigo_pedido)
 );
 
+CREATE TABLE Subpedido(
+  codigo_subpedido INT AUTO_INCREMENT NOT NULL,
+  cantidad INT NOT NULL,
+  subtotal INT noT NULL,
+  codigo_pedido INT NOT NULL,
+  codigo_producto INT NOT NULL,
+
+  CONSTRAINT PK_Subpedido PRIMARY KEY(codigo_subpedido),
+  CONSTRAINT FK_Subpedido_Pedido FOREIGN KEY(codigo_pedido) REFERENCES Pedido(codigo_pedido),
+  CONSTRAINT FK_Subpedido_Producto FOREIGN KEY(codigo_producto) REFERENCES Producto(codigo_producto)
+);
 
 
 
