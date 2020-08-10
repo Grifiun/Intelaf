@@ -66,15 +66,12 @@ CREATE TABLE Pedido(
   estado VARCHAR(9) NOT NULL,
   fecha CHAR(10) NOT NULL,
   anticipo INT NOT NULL,
-  cantidad INT NOT NULL,
   codigo_tienda_origen INT NOT NULL,
   codigo_tienda_destino INT NOT NULL,
-  codigo_producto INT NOT NULL,
   nit_cliente VARCHAR(13) NOT NULL,
   
   CONSTRAINT PK_Pedido PRIMARY KEY(codigo_pedido),
   CONSTRAINT FK_Pedido_Tiempo_envio FOREIGN KEY(codigo_tienda_origen, codigo_tienda_destino) REFERENCES Tiempo_envio(tienda_1, tienda_2),
-  CONSTRAINT FK_Pedido_Producto FOREIGN KEY(codigo_producto) REFERENCES Producto(codigo_producto),
   CONSTRAINT FK_Pedido_Cliente FOREIGN KEY(nit_cliente) REFERENCES Cliente(nit)
 );
 
@@ -85,12 +82,12 @@ CREATE TABLE Compra(
   precio_total INT NOT NULL,
   codigo_tienda INT NOT NULL,
   nit_cliente VARCHAR(13) NOT NULL,
-  codigo_producto INT NOT NULL,
+  codigo_pedido INT NOT NULL,
 
   CONSTRAINT PK_Compra PRIMARY KEY(codigo_compra),
   CONSTRAINT FK_Compra_Tienda FOREIGN KEY(codigo_tienda) REFERENCES Tienda(codigo_tienda),
   CONSTRAINT FK_Compra_Cliente FOREIGN KEY(nit_cliente) REFERENCES Cliente(nit),
-  CONSTRAINT FK_Compra_Producto FOREIGN KEY(codigo_producto) REFERENCES Producto(codigo_producto)
+  CONSTRAINT FK_Compra_Pedido FOREIGN KEY(codigo_pedido) REFERENCES Pedido(codigo_pedido)
 );
 
 
