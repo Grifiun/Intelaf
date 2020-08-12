@@ -31,7 +31,7 @@ CREATE TABLE Producto(
   cantidad INT NOT NULL,
   precio INT NOT NULL,
   nombre_producto VARCHAR(25) NOT NULL,
-  fabricante INT NOT NULL,
+  fabricante VARCHAR(20) NOT NULL,
   descripcion VARCHAR(45),
   garantia INT,
   codigo_tienda INT,
