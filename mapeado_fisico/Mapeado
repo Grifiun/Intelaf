@@ -1,7 +1,7 @@
 MAPEADO FÍSICO - INTELAF
 
 CREATE TABLE Tienda(
-  codigo_tienda INT NOT NULL,
+  codigo_tienda VARCHAR(8) NOT NULL,
   nombre_tienda VARCHAR(25) NOT NULL,
   direccion_tienda VARCHAR(15) NOT NULL,
   telefono_1 CHAR(8) NOT NULL,
@@ -27,9 +27,9 @@ CREATE TABLE Empleado(
 );
 
 CREATE TABLE Producto(
-  codigo_producto INT NOT NULL,
+  codigo_producto VARCHAR(9) NOT NULL,
   cantidad INT NOT NULL,
-  precio INT NOT NULL,
+  precio DECIMAL(7,2) NOT NULL,
   nombre_producto VARCHAR(25) NOT NULL,
   fabricante VARCHAR(20) NOT NULL,
   descripcion VARCHAR(45),
@@ -47,14 +47,14 @@ CREATE TABLE Cliente(
   correo_cliente VARCHAR(25),
   dirreccion_cliente VARCHAR(15),
   dpi VARCHAR(13),
-  credito INT,
+  credito DECIMAL(7,2),
 
   CONSTRAINT PK_Cliente PRIMARY KEY(nit)
 );
 
 CREATE TABLE Tiempo_envio(
-  tienda_1 CHAR(8) NOT NULL,
-  tienda_2 CHAR(8) NOT NULL,
+  tienda_1 VARCHAR(8) NOT NULL,
+  tienda_2 VARCHAR(8) NOT NULL,
   tiempo INT NOT NULL,
 
   CONSTRAINT PK_Tiempo_envio PRIMARY KEY(tienda_1, tienda_2, tiempo)
@@ -62,12 +62,12 @@ CREATE TABLE Tiempo_envio(
 
 CREATE TABLE Pedido(
   codigo_pedido INT NOT NULL,
-  total INT NOT NULL,
+  total DECIMAL(7,2) NOT NULL,
   estado VARCHAR(9) NOT NULL,
-  fecha CHAR(10) NOT NULL,
-  anticipo INT NOT NULL,
-  codigo_tienda_origen INT NOT NULL,
-  codigo_tienda_destino INT NOT NULL,
+  fecha DATE NOT NULL,
+  anticipo DECIMAL(7,2) NOT NULL,
+  codigo_tienda_origen VARCHAR(8) NOT NULL,
+  codigo_tienda_destino VARCHAR(8) NOT NULL,
   nit_cliente VARCHAR(13) NOT NULL,
   
   CONSTRAINT PK_Pedido PRIMARY KEY(codigo_pedido),
@@ -77,10 +77,10 @@ CREATE TABLE Pedido(
 
 CREATE TABLE Compra(
   codigo_compra INT NOT NULL,
-  efectivo INT NOT NULL,
-  credito_usado INT NOT NULL,
-  precio_total INT NOT NULL,
-  codigo_tienda INT NOT NULL,
+  efectivo DECIMAL(7,2) NOT NULL,
+  credito_usado DECIMAL(7,2) NOT NULL,
+  precio_total DECIMAL(7,2) NOT NULL,
+  codigo_tienda VARCHAR(8) NOT NULL,
   nit_cliente VARCHAR(13) NOT NULL,
   codigo_pedido INT NOT NULL,
 
@@ -93,9 +93,9 @@ CREATE TABLE Compra(
 CREATE TABLE Subpedido(
   codigo_subpedido INT AUTO_INCREMENT NOT NULL,
   cantidad INT NOT NULL,
-  subtotal INT noT NULL,
+  subtotal DECIMAL(7,2) noT NULL,
   codigo_pedido INT NOT NULL,
-  codigo_producto INT NOT NULL,
+  codigo_producto VARCHAR(9) NOT NULL,
 
   CONSTRAINT PK_Subpedido PRIMARY KEY(codigo_subpedido),
   CONSTRAINT FK_Subpedido_Pedido FOREIGN KEY(codigo_pedido) REFERENCES Pedido(codigo_pedido),
