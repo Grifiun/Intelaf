@@ -63,9 +63,8 @@ public class LectorArchivo {
         auxCadenas = linea.split(",");                 
             switch(auxCadenas[0]){
                 case TIENDA:
-                    //DATOS: Nombre(String), Direccion(String), Codigo(String), Telefono(String)
-                    System.out.println("TIENDA");
-                    restricciones = NOMBRE+"-"+DIRECCION+"-"+ENTERO+"-"+ENTERO;
+                    //DATOS: Nombre(String), Direccion(String), Codigo(String), Telefono(String)                    
+                    restricciones = NOMBRE+"-"+DIRECCION+"-"+NINGUNO+"-"+ENTERO;
                     break;
                 case TIEMPO:
                     //DATOS: Tienda1(String), Tienda2(String), Tiempo(int)
@@ -92,8 +91,11 @@ public class LectorArchivo {
                     System.out.println(ERROR_ENTRADA_DATOS);
                     break;
             }
-            if(validacionTipo == true){                
-                System.out.println(analizarRestricciones(auxCadenas, restricciones.split("-")));
+            if(validacionTipo == true){    
+                boolean er = analizarRestricciones(auxCadenas, restricciones.split("-"));
+                if(er == true)
+                    System.out.println("ERROR EN LA LINEA: "+linea);
+                //else                   
             }
             
     }
@@ -103,12 +105,18 @@ public class LectorArchivo {
      * @param palabra
      * 
      * recibe de parametro la cadena de caracteres a analizar
+     * tipo:
+     * 0: double
+     * 1: integer
      * @return 
      */
-    private int isEntero(String palabra) {
+    private int isNum(String palabra, String tipo) {
         int resultado;//declaramos la variable a retornar
         try {
-            Integer.parseInt(palabra);//convertimos la palabra a Integer
+            if(tipo.equalsIgnoreCase(DECIMAL))
+                Double.parseDouble(palabra);//convertimos la palabra a Integer
+            else if(tipo.equalsIgnoreCase(ENTERO))
+                Long.parseLong(palabra);//convertimos la palabra a Integer            
             resultado = 1;//Si no hay un error entonces es un numero y retornamos true
         } catch (NumberFormatException excepcion) {//de lo contrario es una palabra
             resultado = 0;
@@ -148,19 +156,19 @@ public class LectorArchivo {
     private boolean analizarRestricciones(String[] cadenas, String[] restricciones){
         boolean existenciaErrores = false;
         if((cadenas.length - 1) == restricciones.length){//Comparamos si son tienen la misma cantidad de cadenas ignorando el tipo de registro
-            for(int i = 0; i < cadenas.length; i++){
+            for(int i = 0; i < restricciones.length; i++){
                 //En este apartado removemos los indicativos de que tipo de dato son
                 if(restricciones[i].equalsIgnoreCase(NOMBRE) || restricciones[i].equalsIgnoreCase(PRODUCTO)|| restricciones[i].equalsIgnoreCase(FABRICANTE)){//Si tiene la restriccion nombre
                     cadenas[i + 1] = removerSubCadena(cadenas[i + 1], restricciones[i]);//Se remueve el texto innecesario
                 }else if(restricciones[i].equalsIgnoreCase(ENTERO)){//si la restrccion es de que sea un numero entero
                     //si son numeros enteros hay que verificar su validez
-                    if(isEntero(cadenas[i + 1]) == 0){
-                        System.out.println(ERROR_TIPO_DATOS);
+                    if(isNum(cadenas[i + 1], ENTERO) == 0){
+                        System.out.println(cadenas[i+1]);
                         existenciaErrores = true;//Si retorna 0 es porque no es un entero, por lo que hay error
                     }
                 }else if(restricciones[i].equalsIgnoreCase(DECIMAL)){
                     //Si es decimal removemos el primer "." encontrado, y luego miramos si son numeros
-                    if(isEntero(cadenas[i + 1].replaceFirst("\\.", "")) == 0){//Removemos el primer "." para que sea un numero normal
+                    if(isNum(cadenas[i + 1], DECIMAL) == 0){//Removemos el primer "." para que sea un numero normal
                         System.out.println(ERROR_TIPO_DATOS);
                         existenciaErrores = true;
                     }
@@ -178,7 +186,7 @@ public class LectorArchivo {
                     }
                     //Verificamos si todas las palabras son numeros
                     for(int j = 0; j < datosFecha.length; j++){
-                        if(isEntero(datosFecha[j]) == 0){
+                        if(isNum(datosFecha[j], ENTERO) == 0){
                             existenciaErrores = true;
                         }
                     }                    
