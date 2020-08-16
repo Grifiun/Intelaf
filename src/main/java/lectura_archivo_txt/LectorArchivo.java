@@ -4,8 +4,16 @@
  * en la DB
  */
 package lectura_archivo_txt;
+import conection_data_base.EnlaceJDBC;
+import funciones.IsNum;
+import static funciones.IsNum.isNum;
+import java.awt.List;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import registros.RegistroTienda;
 /**
  *
  * @author grifiun
@@ -95,34 +103,25 @@ public class LectorArchivo {
                 boolean er = analizarRestricciones(auxCadenas, restricciones.split("-"));
                 if(er == true)
                     System.out.println("ERROR EN LA LINEA: "+linea);
-                //else                   
+                else{
+                    if(auxCadenas[0].equalsIgnoreCase(TIENDA)){
+                        try {
+                            ArrayList<String> arrayListAux;
+                            arrayListAux = new ArrayList<String>(Arrays.asList(auxCadenas));
+                            RegistroTienda.registrarTienda(EnlaceJDBC.EnlaceJDBC(), arrayListAux);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(LectorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InstantiationException ex) {
+                            Logger.getLogger(LectorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IllegalAccessException ex) {
+                            Logger.getLogger(LectorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }            
             }
             
-    }
+    }    
     
-    /**
-     * Funcion que nos permitira ver si una variable es un entero
-     * @param palabra
-     * 
-     * recibe de parametro la cadena de caracteres a analizar
-     * tipo:
-     * 0: double
-     * 1: integer
-     * @return 
-     */
-    private int isNum(String palabra, String tipo) {
-        int resultado;//declaramos la variable a retornar
-        try {
-            if(tipo.equalsIgnoreCase(DECIMAL))
-                Double.parseDouble(palabra);//convertimos la palabra a Integer
-            else if(tipo.equalsIgnoreCase(ENTERO))
-                Long.parseLong(palabra);//convertimos la palabra a Integer            
-            resultado = 1;//Si no hay un error entonces es un numero y retornamos true
-        } catch (NumberFormatException excepcion) {//de lo contrario es una palabra
-            resultado = 0;
-        }
-        return resultado;//retornamos el valor
-    }
     
     /**
      * Funcion que nos permitira remover partes de

@@ -1,5 +1,6 @@
 MAPEADO FÍSICO - INTELAF
-
+CREATE DATABASE intelaf;
+USE intelaf;
 CREATE TABLE Tienda(
   codigo_tienda VARCHAR(8) NOT NULL,
   nombre_tienda VARCHAR(25) NOT NULL,
@@ -20,7 +21,7 @@ CREATE TABLE Empleado(
   direccion_empleado VARCHAR(15) NOT NULL,
   nit_empleado VARCHAR(13) NULL,
   telefono_empleado CHAR(8) NOT NULL,
-  codigo_tienda INT NULL,
+  codigo_tienda VARCHAR(8) NULL,
 
   CONSTRAINT PK_Empleado PRIMARY KEY (codigo_empleado),
   CONSTRAINT FK_Empleado FOREIGN KEY(codigo_tienda) REFERENCES Tienda(codigo_tienda)
@@ -34,7 +35,7 @@ CREATE TABLE Producto(
   fabricante VARCHAR(20) NOT NULL,
   descripcion VARCHAR(45),
   garantia INT,
-  codigo_tienda INT,
+  codigo_tienda VARCHAR(8),
 
   CONSTRAINT PK_Producto PRIMARY KEY(codigo_producto),
   CONSTRAINT FK_Producto FOREIGN KEY(codigo_tienda) REFERENCES Tienda(codigo_tienda)
