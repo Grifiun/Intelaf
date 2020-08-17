@@ -12,12 +12,12 @@ import java.util.ArrayList;
  *
  * @author grifiun
  */
-public class RegistroTienda {
-    public static void registrarTienda(java.sql.Connection conexion, ArrayList<String> datos) {
-        //creamos la orde a enviar
-       String orden = "INSERT INTO Tienda (correo, nombre_tienda, direccion_tienda, codigo_tienda, telefono_1)"
-               + "VALUES (?,?,?,?,?)";
-        Consulta.registrarOrden(conexion, datos, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
-        
+public class RegistroTienda extends  RegistroDatos{
+    /**
+     * Registro para la carga de datos del archivo de texto
+     */
+    public RegistroTienda() {
+        setSubOrden("Tienda (nombre_tienda, direccion_tienda, codigo_tienda, telefono_1)");
     }
+    
 }

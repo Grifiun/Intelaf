@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import registros.RegistroCliente;
+import registros.RegistroDatos;
+import registros.RegistroEmpleado;
+import registros.RegistroPedidoYSubPedido;
+import registros.RegistroProducto;
+import registros.RegistroTiempo;
 import registros.RegistroTienda;
 /**
  *
@@ -35,6 +41,7 @@ public class LectorArchivo {
     
     private final String ERROR_ENTRADA_DATOS = "Error en la entrada de datos";
     private final String ERROR_TIPO_DATOS = "Error en el tipo de datos";
+   
     /**
      * En esta funcion se cargara el archivo de texto
      * recibe como parametro el archivo seleccionado
@@ -64,35 +71,41 @@ public class LectorArchivo {
      * recibe como parametro el conjunto de datos de una linea en un bloc de texto
      * @param linea 
      */
-    public void analizarTipoDato(String linea){
+    public void analizarTipoDato(String linea) throws ClassNotFoundException{
         boolean validacionTipo = true;//Dato que nos servira para validar la primera cadena de caracteres
         String[] auxCadenas;   // contendra el conjunto de datos
         String restricciones = "";//contendra las distintas restricciones de cada tipo
-        auxCadenas = linea.split(",");                 
+        auxCadenas = linea.split(",");  
+        RegistroDatos registrar = null;//Instanciamos la clase padre de los registros        
             switch(auxCadenas[0]){
                 case TIENDA:
                     //DATOS: Nombre(String), Direccion(String), Codigo(String), Telefono(String)                    
                     restricciones = NOMBRE+"-"+DIRECCION+"-"+NINGUNO+"-"+ENTERO;
+                    registrar = new RegistroTienda();
                     break;
                 case TIEMPO:
                     //DATOS: Tienda1(String), Tienda2(String), Tiempo(int)
                     restricciones = NINGUNO+"-"+NINGUNO+"-"+ENTERO;
+                    registrar = new RegistroTiempo();
                     break;
                 case PRODUCTO:
                     //DATOS: Nombre(String), Fabricante(String), Codigo(String), Cantidad(int), Precio(Decimal), Tienda(String)
                     restricciones = NOMBRE+"-"+FABRICANTE+"-"+NINGUNO+"-"+ENTERO+"-"+DECIMAL+"-"+NINGUNO;
+                    registrar = new RegistroProducto();
                     break;
                 case EMPLEADO:
                     //DATOS: Nombre(String), CodigoEmpleado(int), Telefono(int), DPI(int)
                     restricciones = NOMBRE+"-"+ENTERO+"-"+ENTERO+"-"+ENTERO;
+                    registrar = new RegistroEmpleado();
                     break;
                 case CLIENTE:
                     //DATOS: Nombre(String), NIT(String), Telefono(int), Credito(Decimal)
                     restricciones = NOMBRE+"-"+NINGUNO+"-"+ENTERO+"-"+DECIMAL;
+                    registrar = new RegistroCliente();
                     break;
                 case PEDIDO:
-                    //Codigo(int), Tienda1(String), Tienda2(String), Fecha(Fecha), Cliente(String), Articulo(String), Cantidad(int), Total(Decimal), Anticipo(Decimal)
-                    restricciones = ENTERO+"-"+NINGUNO+"-"+NINGUNO+"-"+FECHA+"-"+NINGUNO+"-"+NINGUNO+"-"+ENTERO+"-"+DECIMAL+"-"+DECIMAL;
+                    //Codigo(int), Tienda1(String), Tienda2(String), Fecha(Fecha), Cliente(String), -Articulo(String), -Cantidad(int), -Total(Decimal), Anticipo(Decimal)
+                    restricciones = ENTERO+"-"+NINGUNO+"-"+NINGUNO+"-"+FECHA+"-"+NINGUNO+"-"+NINGUNO+"-"+ENTERO+"-"+DECIMAL+"-"+DECIMAL;                    
                     break;
                 default:
                     validacionTipo = false;
@@ -103,21 +116,26 @@ public class LectorArchivo {
                 boolean er = analizarRestricciones(auxCadenas, restricciones.split("-"));
                 if(er == true)
                     System.out.println("ERROR EN LA LINEA: "+linea);
-                else{
-                    if(auxCadenas[0].equalsIgnoreCase(TIENDA)){
+                else{                    
+                    ArrayList<String> arrayListAux;                            
+                    arrayListAux = new ArrayList<String>(Arrays.asList(auxCadenas));//Agregamos los datos del String[] a un arrayList
+                    arrayListAux.remove(0);//REMOVEMOS EL IDENTIFICADOR
+                           
+                    
+                    if(auxCadenas[0].equalsIgnoreCase(PEDIDO) == false){//Si no es del tipo PEdido se registra de forma general
                         try {
-                            ArrayList<String> arrayListAux;
-                            arrayListAux = new ArrayList<String>(Arrays.asList(auxCadenas));
-                            RegistroTienda.registrarTienda(EnlaceJDBC.EnlaceJDBC(), arrayListAux);
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(LectorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                            registrar.registrarDatos(EnlaceJDBC.EnlaceJDBC(), arrayListAux);//registramos en la db
                         } catch (InstantiationException ex) {
-                            Logger.getLogger(LectorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("Error de instancia en el lector");
                         } catch (IllegalAccessException ex) {
-                            Logger.getLogger(LectorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("Error de acceso en el lector");
                         }
                     }
-                }            
+                    else{//Si es del tipo pedido se asigna de forma especial
+                        RegistroPedidoYSubPedido regPdSp = new RegistroPedidoYSubPedido(arrayListAux);
+                        regPdSp.registrarPedidoYSubPedido();
+                    }                     
+                }      
             }
             
     }    
@@ -163,6 +181,7 @@ public class LectorArchivo {
                     //si son numeros enteros hay que verificar su validez
                     if(isNum(cadenas[i + 1], ENTERO) == 0){
                         System.out.println(cadenas[i+1]);
+                        System.out.println("ERROR ENTERO");
                         existenciaErrores = true;//Si retorna 0 es porque no es un entero, por lo que hay error
                     }
                 }else if(restricciones[i].equalsIgnoreCase(DECIMAL)){

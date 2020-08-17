@@ -9,6 +9,7 @@ import funciones.IsNum;
 import static funciones.IsNum.isNum;
 import java.io.InputStream;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -29,14 +30,30 @@ public class Consulta {
      * @return 
      */
     public static void registrarOrden(java.sql.Connection conexion, ArrayList<String> datos, String orden){
-    try {           
+        try {           
            crearDeclaracionPreparada(conexion, datos, orden).executeUpdate(); //Ejecutamos la orden de tipo Query creada a partir de la orden y datos dados
            if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
                 conexion.close();
         } catch (SQLException ex) {
-            System.out.println("\n\n\n"+ex); //Imprimimos el error en consola en caso de fallar           
+            System.out.println("\nNO SE HIZO EL REGISTRO, POSIBLES ERRORES: DUPLICACION DE PK"); //Imprimimos el error en consola en caso de fallar           
         }  
-    }    
+    } 
+    /**
+     * Funcion encargada de realizar un Query, devuelve un resultSet
+     * @param conexion
+     * @param datos
+     * @param orden
+     * @return 
+     */
+    public static ResultSet consultaOrden(java.sql.Connection conexion, ArrayList<String> datos, String orden){
+         ResultSet rsPrueba = null;
+        try {           
+           rsPrueba = crearDeclaracionPreparada(conexion, datos, orden).executeQuery(); //realizamos la consulta de la orden dada           
+        } catch (SQLException ex) {
+            System.out.println("\nERROR EN LA CONSULTA "+ex); //Imprimimos el error en consola en caso de fallar           
+        }         
+        return rsPrueba;
+    }
 
     /**
      * Funcion encargada de crear y retornar una declaracion preparada con la
@@ -60,7 +77,7 @@ public class Consulta {
             }
             return dp;
         } catch (SQLException ex) {
-            System.out.println("\n\n\n"+ex); //Imprimimos el error en consola en caso de fallar           
+            System.out.println("\nERROR AL CREAR EL DP"); //Imprimimos el error en consola en caso de fallar           
         } 
         return null;
     }
@@ -78,7 +95,7 @@ public class Consulta {
             dp = conexion.prepareStatement(orden);
             return dp;
         } catch (SQLException ex) {
-            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("\nERROR AL CREAR EL DP SIMPLE");
         }
         return null;
     }
