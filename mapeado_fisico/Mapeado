@@ -17,8 +17,8 @@ CREATE TABLE Empleado(
   codigo_empleado INT NOT NULL,
   nombre_empleado VARCHAR(25) NOT NULL,
   dpi CHAR(13) NOT NULL,
-  correo_empleado VARCHAR(25) NOT NULL,
-  direccion_empleado VARCHAR(15) NOT NULL,
+  correo_empleado VARCHAR(25) NULL,
+  direccion_empleado VARCHAR(15) NULL,
   nit_empleado VARCHAR(13) NULL,
   telefono_empleado CHAR(8) NOT NULL,
   codigo_tienda VARCHAR(8) NULL,
@@ -37,7 +37,7 @@ CREATE TABLE Producto(
   garantia INT,
   codigo_tienda VARCHAR(8),
 
-  CONSTRAINT PK_Producto PRIMARY KEY(codigo_producto),
+  CONSTRAINT PK_Producto PRIMARY KEY(codigo_producto, codigo_tienda),
   CONSTRAINT FK_Producto FOREIGN KEY(codigo_tienda) REFERENCES Tienda(codigo_tienda)
 );
 
@@ -63,16 +63,16 @@ CREATE TABLE Tiempo_envio(
 
 CREATE TABLE Pedido(
   codigo_pedido INT NOT NULL,
-  total DECIMAL(7,2) NOT NULL,
-  estado VARCHAR(9) NOT NULL,
+  estado VARCHAR(9) NOT NULL DEFAULT 'ACTIVO',
   fecha DATE NOT NULL,
   anticipo DECIMAL(7,2) NOT NULL,
-  codigo_tienda_origen VARCHAR(8) NOT NULL,
+  codigo_tienda_1 VARCHAR(8) NOT NULL,
+  codigo_tienda_2 VARCHAR(8) NULL,
   codigo_tienda_destino VARCHAR(8) NOT NULL,
   nit_cliente VARCHAR(13) NOT NULL,
   
   CONSTRAINT PK_Pedido PRIMARY KEY(codigo_pedido),
-  CONSTRAINT FK_Pedido_Tiempo_envio FOREIGN KEY(codigo_tienda_origen, codigo_tienda_destino) REFERENCES Tiempo_envio(tienda_1, tienda_2),
+  CONSTRAINT FK_Pedido_Tiempo_envio FOREIGN KEY(codigo_tienda_1, codigo_tienda_2) REFERENCES Tiempo_envio(tienda_1, tienda_2),
   CONSTRAINT FK_Pedido_Cliente FOREIGN KEY(nit_cliente) REFERENCES Cliente(nit)
 );
 
