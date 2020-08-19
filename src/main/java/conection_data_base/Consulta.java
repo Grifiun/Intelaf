@@ -54,6 +54,23 @@ public class Consulta {
         }         
         return rsPrueba;
     }
+    
+    /**
+     * Funcion encargada de realizar un Query simple, devuelve un resultSet
+     * a diferencia de la otra funcion, esta no recibe datos
+     * @param conexion
+     * @param orden
+     * @return 
+     */
+    public static ResultSet consultaOrden(java.sql.Connection conexion, String orden){
+         ResultSet rsPrueba = null;
+        try {           
+           rsPrueba = crearDeclaracionPreparada(conexion, orden).executeQuery(); //realizamos la consulta de la orden dada           
+        } catch (SQLException ex) {
+            System.out.println("\nERROR EN LA CONSULTA "+ex); //Imprimimos el error en consola en caso de fallar           
+        }         
+        return rsPrueba;
+    }
 
     /**
      * Funcion encargada de crear y retornar una declaracion preparada con la
@@ -89,7 +106,7 @@ public class Consulta {
      * @param orden
      * @return 
      */
-    public static PreparedStatement crearDeclaracionPreparadaSimple(java.sql.Connection conexion, String orden){
+    public static PreparedStatement crearDeclaracionPreparada(java.sql.Connection conexion, String orden){
         PreparedStatement dp = null;
         try {
             dp = conexion.prepareStatement(orden);

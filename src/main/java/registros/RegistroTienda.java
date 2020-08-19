@@ -6,6 +6,7 @@
 package registros;
 
 import conection_data_base.Consulta;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,10 @@ public class RegistroTienda extends  RegistroDatos{
      */
     public RegistroTienda() {
         setSubOrden("Tienda (nombre_tienda, direccion_tienda, codigo_tienda, telefono_1)");
+    }
+    
+    public boolean verificarExistenciaRegisgtroTienda(java.sql.Connection conexion) throws SQLException{
+        return verificarExistenciaRegisgtro(conexion, "Tienda");
     }
     
 }
