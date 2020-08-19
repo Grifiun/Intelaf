@@ -5,28 +5,42 @@
  */
 package graficos;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.awt.Color;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import lectura_archivo_txt.LectorArchivo;
-
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import registros.RegistroTienda;
+import paneles.*;
 /**
  *
  * @author grifiun
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    private File file;
-    private String rutaArchivo;
+    
+    //instanaciamos los paneles
+    private PanelCargaDatos panelCD;
+    private PanelLogin panelLogin;
+    //creamos el jscrollpane
+    JScrollPane contenedorPanel;
     /**
-     * Creates new form Menu_principal
+     * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
-        initComponents();
+        
+            initComponents();
+            initContenedorPaneles();
+            
+            
+            if(verificarExistenciaRegistro()){//si hay datos cargamos el login
+                panelLogin = new PanelLogin();
+                cargarPanel(panelLogin);
+            }else{//si no hay datos mostramos el panel de cargar datos
+                panelCD = new PanelCargaDatos();            
+                cargarPanel(panelCD);
+            }            
+        
     }
 
     /**
@@ -38,78 +52,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtBuscar = new javax.swing.JButton();
-        txtDir = new java.awt.TextField();
-        txtCargar = new javax.swing.JButton();
-        lblMsgError = new java.awt.Label();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtBuscar.setText("buscar");
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
-
-        txtCargar.setText("cargar");
-        txtCargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCargarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCargar)
-                    .addComponent(txtBuscar))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDir, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addComponent(lblMsgError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(202, Short.MAX_VALUE))
+            .addGap(0, 719, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(155, 155, 155))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMsgError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGap(0, 420, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        txtDir.setText(buscarDireccion());
-    }//GEN-LAST:event_txtBuscarActionPerformed
-
-    private void txtCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargarActionPerformed
-        if(file==null){
-            lblMsgError.setText("Este Archivo No Existe");//si el archivo es null, se muestra el mensaje de error
-        }else{
-            if(file.isFile()){
-                LectorArchivo lector = new LectorArchivo();
-                lector.leerArchivo(file);
-            }else{
-                lblMsgError.setText("Elija un Archivo .txt");
-            }
-        }
-    }//GEN-LAST:event_txtCargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,7 +94,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -146,27 +102,46 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    /**
+     * Se cargan los paneles;
+     */
+    private void initContenedorPaneles() {        
+        contenedorPanel = new JScrollPane();   
+        contenedorPanel.setBounds(2, 2, 713, 413);//Agregamos posicion y tamano
+        add(contenedorPanel);
+    }
+    
+    /**
+     * Se carga el panel mandado
+     * @param JPanel 
+     */
+    private void cargarPanel(JPanel panelAux) {
+        contenedorPanel.setViewportView(panelAux);//cargamos el panel
+    }
+    
+    /**
+     * Funcion  encargada de revisar la existencia de datos
+     * @return 
+     */
+    private boolean verificarExistenciaRegistro() {            
+        try {
+            //Instanciamos 
+            boolean existenciaRegistro;
+            RegistroTienda rt = new RegistroTienda();
+            //Verificamos la existencia de archivos
+            return existenciaRegistro = rt.verificarExistenciaRegisgtroTienda(conection_data_base.EnlaceJDBC.EnlaceJDBC());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return false;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Label lblMsgError;
-    private javax.swing.JButton txtBuscar;
-    private javax.swing.JButton txtCargar;
-    private java.awt.TextField txtDir;
     // End of variables declaration//GEN-END:variables
-
-    private String buscarDireccion(){
-        JFileChooser buscador = new JFileChooser();  // Agregamos un JFileChooser para buscar el archivo que queremos leer  
-        //buscador.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileFilter filter = new FileNameExtensionFilter("*.txt", "txt", "text");
-        buscador.setFileFilter(filter);
-        
-        buscador.showOpenDialog(this);
-        file = buscador.getSelectedFile(); //El archivo seleccionado es el que agregamos a nuestra variable de tipo file
-        if(file == null){//si el archivo es nulo
-            rutaArchivo="";        // entonces la dirrecion sera vacia
-        }else{
-        rutaArchivo = buscador.getSelectedFile().getAbsolutePath();  //si no es nulo entonces le asignaremos el path a nuestra var
-        }
-        return rutaArchivo;//retornamos el path
-    }
 }

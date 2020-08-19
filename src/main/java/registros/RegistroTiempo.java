@@ -43,7 +43,6 @@ public class RegistroTiempo extends RegistroDatos{
         try {           
             while(rsPrueba.next()){//si el tiempo               
                 aux = rsPrueba.getInt("tiempo");//el booleano es verdadero  
-                System.out.println("TIEMPO DE LA TIENDA: "+tienda1+" HACIA "+tienda2+" :"+aux);
                 
             }   
         } catch (SQLException ex) {
