@@ -39,6 +39,7 @@ public class PanelCargaDatos extends javax.swing.JPanel {
         txtCargar = new javax.swing.JButton();
         lblMsgError = new java.awt.Label();
         label1 = new java.awt.Label();
+        jLabel1 = new javax.swing.JLabel();
 
         txtBuscar.setText("buscar");
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +57,8 @@ public class PanelCargaDatos extends javax.swing.JPanel {
 
         label1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         label1.setText("Cargar datos");
+
+        jLabel1.setText("NOTA: Reinicie el programa despues de leer los datos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,6 +78,9 @@ public class PanelCargaDatos extends javax.swing.JPanel {
                         .addGap(51, 51, 51)
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(224, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +95,8 @@ public class PanelCargaDatos extends javax.swing.JPanel {
                     .addComponent(txtCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMsgError, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114))
+                .addGap(96, 96, 96)
+                .addComponent(jLabel1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -131,6 +138,7 @@ public class PanelCargaDatos extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private java.awt.Label label1;
     private java.awt.Label lblMsgError;
     private javax.swing.JButton txtBuscar;

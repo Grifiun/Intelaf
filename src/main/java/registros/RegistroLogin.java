@@ -5,19 +5,18 @@
  */
 package registros;
 
-import static conection_data_base.Consulta.consultaOrden;
-import java.sql.ResultSet;
+import graficos.MenuPrincipal;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import paneles.PanelEmpleado;
 
 /**
  * Clase encargada del login 
+ * tambien redirige a los paneles de Empleado o cliente
  * @author grifiun
  */
 public class RegistroLogin extends RegistroDatos{
     /**
      * Se verifica el tipo de rol que tiene el cliente con el codigo de usuario
-     * @param conexion
      * @param codigoUsuario
      * @return
      * @throws SQLException 
@@ -29,6 +28,10 @@ public class RegistroLogin extends RegistroDatos{
         RegistroCliente regCliente = new RegistroCliente();
         
         if(regEmp.verificarExistenciaEmpleado(codigoUsuario)){//Si existe en la tabla de Empleado retornamos empleado
+            //instanaciamos el panel empleado
+            PanelEmpleado panelEmpleado = new PanelEmpleado();
+            MenuPrincipal.cargarPanel(panelEmpleado);//mostramaos en el contenedor de paneles
+            
             rolUser = "Empleado";
         }else if(regCliente.verificarExistenciaCliente(codigoUsuario)){//Si existe en la tabla de Cliente retornamos cliente
             rolUser = "Cliente";

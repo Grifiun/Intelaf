@@ -32,18 +32,11 @@ public class RegistroEmpleado extends RegistroDatos{
         datos.add(codigo);
         
         try {
-            existe = verificarExistenciaRegisgtro(conection_data_base.EnlaceJDBC.EnlaceJDBC(), orden, datos);//se retorna si existe el empleado o no
+            existe = verificarExistenciaRegisgtro(orden, datos);//se retorna si existe el empleado o no
             return existe;
         } catch (SQLException ex) {
             Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }        
         
         return existe;
     }

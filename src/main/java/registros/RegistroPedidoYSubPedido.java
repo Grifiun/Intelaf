@@ -46,24 +46,15 @@ public class RegistroPedidoYSubPedido {
      * @param tienda2
      * @return 
      */
-    public boolean verificarDireccionEnvio(String tienda1, String tienda2){    
-        
+    public boolean verificarDireccionEnvio(String tienda1, String tienda2){   
         int tiempo;
         try {
             RegistroTiempo regT = new RegistroTiempo();
-            tiempo = regT.revisarTiempo(conection_data_base.EnlaceJDBC.EnlaceJDBC(), tienda1, tienda2);
-            System.out.println(tiempo);
+            tiempo = regT.revisarTiempo(tienda1, tienda2);//revisamos la existencia del tiempo entre las tiendas, de existir            
             if(tiempo > 0){
-                System.out.println("TRUE");
                 return true;
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RegistroPedidoYSubPedido.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(RegistroPedidoYSubPedido.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(RegistroPedidoYSubPedido.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(RegistroPedidoYSubPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
@@ -72,53 +63,33 @@ public class RegistroPedidoYSubPedido {
     /**
      * Realizamos los respectivos registros
      */
-    public void registrarPedidoYSubPedido(){
-        
+    public void registrarPedidoYSubPedido(){        
             RegistroPedido regP = new RegistroPedido();
             RegistroSubPedido regSP = new RegistroSubPedido();  
-            
-            
+                        
             /**
              * Registramos el pedido
              */
             try {
-                try {
-                    if(regP.revisarExistenciaPedido(conection_data_base.EnlaceJDBC.EnlaceJDBC(), datosPedido.get(0)) == true){
-                        System.out.println("Ya esta registrado ese pedido, por lo tanto solo seran agregado el subpedido");
-                    }else{                
-                        regP.registrarDatos(conection_data_base.EnlaceJDBC.EnlaceJDBC(), datosPedido);
-                    }
-                } catch (SQLException ex) {
-                    System.out.println("ERROR SQL");
-                }
-                
-            } catch (ClassNotFoundException ex) {
-                System.out.println("CLASSNOTFOUND");
-            } catch (InstantiationException ex) {
-                System.out.println("INSTANCIA");
-            } catch (IllegalAccessException ex) {
-                System.out.println("ACCESO ILEGAL");
+                if(regP.revisarExistenciaPedido(datosPedido.get(0)) == true){//Revisamos la existencia del registro del pedido
+                    System.out.println("Ya esta registrado ese pedido, por lo tanto solo seran agregado el subpedido");//si ya esta registrado no dubpplicamos el registro
+                }else{                
+                    regP.registrarDatos(datosPedido);//si no hay registro se crea uno nuevo
+                }    
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistroPedidoYSubPedido.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
             /**
              * Registramos el subpedido
              */
-            try {
-                try {
-                    if(regP.revisarExistenciaPedido(conection_data_base.EnlaceJDBC.EnlaceJDBC(), datosPedido.get(0)) == true){
-                        regSP.registrarDatos(conection_data_base.EnlaceJDBC.EnlaceJDBC(), subDatos);
-                    }                
-                } catch (SQLException ex) {
-                    System.out.println("ERROR EN EL INGRESO DEL SUBPEDIDO");
+            try {            
+                if(regP.revisarExistenciaPedido(datosPedido.get(0)) == true){//Si hay existencia del pedido
+                    regSP.registrarDatos(subDatos);//se hace registro del subpedido
                 }
-                
-            } catch (ClassNotFoundException ex) {
-                System.out.println("NOT FOUND EX");
-            } catch (InstantiationException ex) {
-                System.out.println("INSTANCIA");
-            } catch (IllegalAccessException ex) {
-                System.out.println("ACCESO ILEGAL");
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistroPedidoYSubPedido.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
     }
     
 }

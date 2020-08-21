@@ -23,23 +23,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private PanelCargaDatos panelCD;
     private PanelLogin panelLogin;
     //creamos el jscrollpane
-    JScrollPane contenedorPanel;
+    public static JScrollPane contenedorPanel;
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
+        initComponents();
+        initContenedorPaneles();
         
-            initComponents();
-            initContenedorPaneles();
-            
-            
-            if(verificarExistenciaRegistro()){//si hay datos cargamos el login
-                panelLogin = new PanelLogin();
-                cargarPanel(panelLogin);
-            }else{//si no hay datos mostramos el panel de cargar datos
-                panelCD = new PanelCargaDatos();            
-                cargarPanel(panelCD);
-            }            
+        try {   
+            conection_data_base.EnlaceJDBC.crearEnlaceJDBC();//Creamos la conexion que se usara a lo largo de la ejecucion del programa
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(verificarExistenciaRegistro()){//si hay datos cargamos el login
+            panelLogin = new PanelLogin();
+            cargarPanel(panelLogin);
+        }else{//si no hay datos mostramos el panel de cargar datos
+            panelCD = new PanelCargaDatos();            
+            cargarPanel(panelCD);
+        }           
         
     }
 
@@ -52,21 +60,45 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btExit = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        btExit.setText("X");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 714, Short.MAX_VALUE)
+                .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 378, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Boton que sirve para cerrar todo
+     * @param evt 
+     */
+    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+        //Cerramos la conexion
+        conection_data_base.EnlaceJDBC.cerrarConexion();
+        //cerramos ventana y finalizamos el proyecto
+        System.exit(0);
+    }//GEN-LAST:event_btExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,7 +147,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Se carga el panel mandado
      * @param JPanel 
      */
-    private void cargarPanel(JPanel panelAux) {
+    public static void cargarPanel(JPanel panelAux) {
         contenedorPanel.setViewportView(panelAux);//cargamos el panel
     }
     
@@ -125,17 +157,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     private boolean verificarExistenciaRegistro() {            
         try {
-            //Instanciamos 
-            boolean existenciaRegistro;
+            //Instanciamos             
             RegistroTienda rt = new RegistroTienda();
             //Verificamos la existencia de archivos
-            return existenciaRegistro = rt.verificarExistenciaRegisgtroTienda(conection_data_base.EnlaceJDBC.EnlaceJDBC());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            return rt.verificarExistenciaRegisgtroTienda();        
         } catch (SQLException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -143,5 +168,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btExit;
     // End of variables declaration//GEN-END:variables
 }

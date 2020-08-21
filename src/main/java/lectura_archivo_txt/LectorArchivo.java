@@ -4,15 +4,11 @@
  * en la DB
  */
 package lectura_archivo_txt;
-import conection_data_base.EnlaceJDBC;
-import funciones.IsNum;
 import static funciones.IsNum.isNum;
-import java.awt.List;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import registros.RegistroCliente;
 import registros.RegistroDatos;
 import registros.RegistroEmpleado;
@@ -60,8 +56,20 @@ public class LectorArchivo {
                 }
                 analizarTipoDato(aux);
             }
+            //Mostramos el mensaje         
+            RegistroTienda rt = new RegistroTienda();
+            if(rt.verificarExistenciaRegisgtroTienda()){
+                JOptionPane.showMessageDialog(null, "Archivo leido y almacenado, reinicie el programa");
+            }else{
+                JOptionPane.showMessageDialog(null, "Archivo leido pero hay un error en la entrada");
+            }
+            
+            
+            
         }catch(Exception e){
             System.out.println("Hubo un error en la carga de archivo");
+            JOptionPane.showMessageDialog(null, "Error en la carga leido");
+            
         }   
     }
    
@@ -119,22 +127,15 @@ public class LectorArchivo {
                 else{                    
                     ArrayList<String> arrayListAux;                            
                     arrayListAux = new ArrayList<String>(Arrays.asList(auxCadenas));//Agregamos los datos del String[] a un arrayList
-                    arrayListAux.remove(0);//REMOVEMOS EL IDENTIFICADOR
-                           
+                    arrayListAux.remove(0);//REMOVEMOS EL IDENTIFICADOR                           
                     
                     if(auxCadenas[0].equalsIgnoreCase(PEDIDO) == false){//Si no es del tipo PEdido se registra de forma general
-                        try {
-                            registrar.registrarDatos(EnlaceJDBC.EnlaceJDBC(), arrayListAux);//registramos en la db
-                        } catch (InstantiationException ex) {
-                            System.out.println("Error de instancia en el lector");
-                        } catch (IllegalAccessException ex) {
-                            System.out.println("Error de acceso en el lector");
-                        }
+                        registrar.registrarDatos(arrayListAux);//registramos los datos en la db     
                     }
                     else{//Si es del tipo pedido se asigna de forma especial
                         RegistroPedidoYSubPedido regPdSp = new RegistroPedidoYSubPedido(arrayListAux);
                         regPdSp.registrarPedidoYSubPedido();
-                    }                     
+                    } 
                 }      
             }
             

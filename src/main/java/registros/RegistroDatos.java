@@ -18,11 +18,9 @@ public class RegistroDatos extends conection_data_base.Consulta{
     private String subOrden = "";
     /**
      * Registra los datos sen una tabla especificada en subOrden
-     * @param conexion
      * @param datos
-     * @param subOrden 
      */
-    public void registrarDatos(java.sql.Connection conexion, ArrayList<String> datos) {
+    public void registrarDatos(ArrayList<String> datos) {
         //creamos la orde a enviar
         String valores = "?";
         for(int i = 1; i < datos.size(); i++){
@@ -30,7 +28,7 @@ public class RegistroDatos extends conection_data_base.Consulta{
         }
         String orden = "INSERT INTO "+subOrden//Ingresamos en la tabla X, los valores Y (los valores son dados por la subOrden)
                + "VALUES ("+valores+")";
-        registrarOrden(conexion, datos, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
+        registrarOrden(datos, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
     }
     
     
@@ -40,29 +38,21 @@ public class RegistroDatos extends conection_data_base.Consulta{
      * sino false
      * 
      * Recibe los siguientes parametros
-     * @param conexion
      * @param orden
      * @param datos
      * @return
      * @throws SQLException 
      */
-    public boolean verificarExistenciaRegisgtro(java.sql.Connection conexion, String orden, ArrayList<String> datos) throws SQLException{
+    public boolean verificarExistenciaRegisgtro(String orden, ArrayList<String> datos) throws SQLException{
          
-        ResultSet rsPrueba = null;
-        rsPrueba = consultaOrden(conexion, datos, orden);      //Realizamos el ResultSet  
-        try {           
+        //creamos el ResultSet dentro del try catch para que se cierre automaticamente
+        try (ResultSet rsPrueba = consultaOrden(datos, orden);){           
             while(rsPrueba.next()){//si existe el registro               
                 return true;//returnamos true
             }   
         } catch (SQLException ex) {
             System.out.println("ERROR AL BUSCAR EL REGISTRO");
         }
-            
-        rsPrueba.close();//ceramos el ResultSet
-        
-        if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
-            conexion.close();            
-        
         return false;
     }
     
@@ -72,33 +62,24 @@ public class RegistroDatos extends conection_data_base.Consulta{
      * sino false
      * 
      * Recibe los siguientes parametros
-     * @param conexion
-     * @param orden
+     * @param tabla
      * @return
      * @throws SQLException 
      */
-    public boolean verificarExistenciaRegisgtro(java.sql.Connection conexion, String tabla) throws SQLException{
+    public boolean verificarExistenciaRegisgtro(String tabla) throws SQLException{
         String orden = "SELECT * FROM "+tabla;//Creamos la orden, verifica la existencia de registros en la tabla seleccionada 
         
-        ResultSet rsPrueba = null;
-        rsPrueba = consultaOrden(conexion, orden);      //Realizamos el ResultSet  
-        try {           
+        //Realizamos el ResultSet dentro del try catch
+        try (ResultSet rsPrueba = consultaOrden(orden)){           
             while(rsPrueba.next()){//si existe el registro               
                 return true;//returnamos true
             }   
         } catch (SQLException ex) {
             System.out.println("ERROR AL BUSCAR EL REGISTRO");
         }
-            
-        rsPrueba.close();//ceramos el ResultSet
-        
-        if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
-            conexion.close();            
         
         return false;
-    }
-    
-    
+    } 
     
     /**
      * Setter 
