@@ -14,9 +14,9 @@ public class Cliente {
     private String correo_cliente;
     private String dirreccion_cliente;
     private String dpi;
-    private int credito;
+    private String credito;
 
-    public Cliente(String nit, String nombre_cliente, String telefono_cliente, String correo_cliente, String dirreccion_cliente, String dpi, int credito) {
+    public Cliente(String nit, String nombre_cliente, String telefono_cliente, String correo_cliente, String dirreccion_cliente, String dpi, String credito) {
         this.nit = nit;
         this.nombre_cliente = nombre_cliente;
         this.telefono_cliente = telefono_cliente;
@@ -74,11 +74,11 @@ public class Cliente {
         this.dpi = dpi;
     }
 
-    public int getCredito() {
+    public String getCredito() {
         return credito;
     }
 
-    public void setCredito(int credito) {
+    public void setCredito(String credito) {
         this.credito = credito;
     }
     

@@ -21,6 +21,12 @@ public class RegistroCliente extends RegistroDatos{
     public RegistroCliente(){
         setSubOrden("Cliente (nombre_cliente, nit, telefono_cliente, credito)");
     }
+    /**
+     * Se carga la subOrden dada
+     */
+    public RegistroCliente(String subOrd){
+        setSubOrden(subOrd);
+    }
     
     /**
      * Se revisa la existencia del cliente con el nit enviado

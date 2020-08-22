@@ -11,12 +11,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author grifiun
  */
-public class Consulta {     
+public class Consulta {
+    public static boolean mensajesEmergentes = true;
     /**
      * Funcion encargada de realizar peticiones de tipo Update
      * Recibe los parametros de conexion, datos y orden
@@ -29,8 +31,13 @@ public class Consulta {
         
         try {           
            crearDeclaracionPreparada(datos, orden).executeUpdate(); //Ejecutamos la orden de tipo Query creada a partir de la orden y datos dados
-           
+            if(mensajesEmergentes){
+                JOptionPane.showMessageDialog(null, "REGISTRO COMPLETO");
+            }
         } catch (SQLException ex) {
+            if(mensajesEmergentes){
+                JOptionPane.showMessageDialog(null, "ERROR AL REALIZAR EL REGISTRO, REVISE LA ENTRADA DE DATOS ES POSIBLE\nQUE HAYA CONFLICTOS DE TIPOS DE DATOS");
+            }
             System.out.println("\nNO SE HIZO EL REGISTRO, POSIBLES ERRORES: DUPLICACION DE PK"); //Imprimimos el error en consola en caso de fallar           
         }  
     } 

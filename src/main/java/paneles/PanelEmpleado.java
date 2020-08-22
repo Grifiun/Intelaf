@@ -5,17 +5,20 @@
  */
 package paneles;
 
+import graficos.MenuPrincipal;
+
 /**
  *
  * @author grifiun
  */
 public class PanelEmpleado extends javax.swing.JPanel {
-
+    private PanelCreacionTienda panelCTienda;
     /**
      * Creates new form PanelEmpleado
      */
     public PanelEmpleado() {
         initComponents();
+        
     }
 
     /**
@@ -28,29 +31,103 @@ public class PanelEmpleado extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnIngresarTienda = new javax.swing.JButton();
+        btnIngresarProducto = new javax.swing.JButton();
+        btnIngresarProducto1 = new javax.swing.JButton();
+        btnIngresarProducto2 = new javax.swing.JButton();
 
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("EMPLEADO");
+
+        btnIngresarTienda.setText("Ingresar Tienda");
+        btnIngresarTienda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarTiendaActionPerformed(evt);
+            }
+        });
+
+        btnIngresarProducto.setText("Ingresar Producto");
+        btnIngresarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarProductoActionPerformed(evt);
+            }
+        });
+
+        btnIngresarProducto1.setText("Ingresar Empleado");
+        btnIngresarProducto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarProducto1ActionPerformed(evt);
+            }
+        });
+
+        btnIngresarProducto2.setText("Ingresar Cliente");
+        btnIngresarProducto2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarProducto2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jLabel1)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnIngresarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIngresarTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIngresarProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIngresarProducto2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel1)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnIngresarTienda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnIngresarProducto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnIngresarProducto1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnIngresarProducto2)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnIngresarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarTiendaActionPerformed
+        panelCTienda = new PanelCreacionTienda();
+        MenuPrincipal.cargarPanel(panelCTienda);
+    }//GEN-LAST:event_btnIngresarTiendaActionPerformed
+
+    private void btnIngresarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProductoActionPerformed
+        PanelIngresarProducto panelProducto = new PanelIngresarProducto();
+        MenuPrincipal.cargarPanel(panelProducto);        
+    }//GEN-LAST:event_btnIngresarProductoActionPerformed
+
+    private void btnIngresarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProducto1ActionPerformed
+       PanelCreacionEmpleado panelCreacionEmp = new PanelCreacionEmpleado();
+       MenuPrincipal.cargarPanel(panelCreacionEmp);
+    }//GEN-LAST:event_btnIngresarProducto1ActionPerformed
+
+    private void btnIngresarProducto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProducto2ActionPerformed
+       PanelCreacionCliente panelCreacionCliente = new PanelCreacionCliente();
+       MenuPrincipal.cargarPanel(panelCreacionCliente);
+    }//GEN-LAST:event_btnIngresarProducto2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIngresarProducto;
+    private javax.swing.JButton btnIngresarProducto1;
+    private javax.swing.JButton btnIngresarProducto2;
+    private javax.swing.JButton btnIngresarTienda;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

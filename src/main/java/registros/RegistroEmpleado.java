@@ -21,6 +21,13 @@ public class RegistroEmpleado extends RegistroDatos{
     public RegistroEmpleado() {
         setSubOrden("Empleado (nombre_empleado, codigo_empleado, telefono_empleado, dpi)");
     }
+    /**
+     * Suborden establecida
+     * @param suborden 
+     */
+    public RegistroEmpleado(String suborden){
+        setSubOrden(suborden);
+    }
     
     /**
      * Se revisa la existencia del empleado con el codigo enviado

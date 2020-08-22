@@ -48,7 +48,7 @@ CREATE TABLE Cliente(
   correo_cliente VARCHAR(25),
   dirreccion_cliente VARCHAR(15),
   dpi VARCHAR(13),
-  credito DECIMAL(7,2),
+  credito DECIMAL(7,2) DEFAULT '0',
 
   CONSTRAINT PK_Cliente PRIMARY KEY(nit)
 );

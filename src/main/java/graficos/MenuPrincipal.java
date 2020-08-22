@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 import registros.RegistroTienda;
 import paneles.*;
 /**
@@ -140,6 +141,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initContenedorPaneles() {        
         contenedorPanel = new JScrollPane();   
         contenedorPanel.setBounds(2, 2, 713, 413);//Agregamos posicion y tamano
+        contenedorPanel.setBorder(new LineBorder(getBackground()));
         add(contenedorPanel);
     }
     
