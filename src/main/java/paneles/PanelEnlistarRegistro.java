@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import registros.RegistroDatos;
 
 /**
@@ -19,10 +21,14 @@ import registros.RegistroDatos;
  * @author grifiun
  */
 public class PanelEnlistarRegistro extends javax.swing.JPanel {
-    private String[] nombreTablas = {"Tienda", "Empleado", "Cliente"};
-    private String[][] nombreColumnas = { "Cod. Tienda,nombre,direccion,telefono,telefono 2,horario,correo".split(","),
-        "Cod. Empleado,nombre,DPI,Correo,Direccion,NIT,Telefono,Trabaja en".split(","),
-        "NIT,nombre,Telefono,Correo,Direccion,DPI,Credito".split(",")};
+    private String[] nombreTablas = {"Tienda", "Empleado", "Cliente", "Producto", "Compra", "Pedido", "Tiempo_envio"};
+    private String[][] nombreColumnas = { "Cod. Tienda,Nombre,Direccion,Telefono,Telefono 2,Horario,Correo".split(","),
+        "Cod. Empleado,Nombre,DPI,Correo,Direccion,NIT,Telefono,Trabaja en".split(","),
+        "NIT,Nombre,Telefono,Correo,Direccion,DPI,Credito".split(","),
+        "Cod. Producto,Cantidad,Precio,Nombre,Fabricante,Descripcion,Garantia,Se encuentra en".split(","),
+        "Cod. Compra,Efectivo usado,Credito usado,Precio Total,Cod. Tienda de compra,NIT Cliente,Cod. Pedido".split(","),
+        "Cod. Pedido,Estado,Fecha de pedido,Anticipo,Cod. Tienda 1,Cod. Tienda2,Cod. Tienda Destino,NIT Cliente".split(","),
+        "Cod. Tienda 1,Cod. Tienda 2,Tiempo entre tiendas".split(",")};
     
     private JPanel panelParaTabla;    
     
@@ -41,12 +47,21 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
      * de la tabla elegida
      * @param nombreTabla 
      */
-    public void prepararTabla(String nombreTabla, String[] tituloColumnas){        
+    public void prepararTabla(String nombreTabla, String[] tituloColumnas){ 
         RegistroDatos regD = new RegistroDatos();
+        TableModel model = new DefaultTableModel(regD.obtenerDatos(nombreTabla), tituloColumnas)
+            {
+              public boolean isCellEditable(int row, int column)
+              {
+                return false;//dehabilitamos la edicion
+              }
+            };
         JTable tablaAux;        
-        tablaAux = new JTable(regD.obtenerDatos(nombreTabla), tituloColumnas);   
+        tablaAux = new JTable(model);   
         tablaAux.setLayout(null);
-        tablaAux.setBounds(0, 0, 680, 330);
+        tablaAux.setBounds(0, 0, 980, 478);
+        
+        tablaAux.setAutoCreateRowSorter(true);       
         
         panelParaTabla.setLayout(new BorderLayout());
         panelParaTabla.add(tablaAux.getTableHeader(), BorderLayout.PAGE_START);
@@ -56,7 +71,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
     public void prepararPanelTabla(){
         panelParaTabla = new JPanel();
         panelParaTabla.setLayout(null);
-        panelParaTabla.setBounds(30, 38, 680, 330);
+        panelParaTabla.setBounds(30, 38, 980, 478);
         this.add(panelParaTabla);       
        
     }
@@ -74,7 +89,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
         comboBoxTabla = new javax.swing.JComboBox<>();
         btnRegresar = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("LISTADOS");
 
         btnCargar.setText("Cargar");
@@ -84,7 +99,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
             }
         });
 
-        comboBoxTabla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tienda", "Empleado", "Cliente" }));
+        comboBoxTabla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tienda", "Empleado", "Cliente", "Producto", "Compra", "Pedido", "Tiempo entre tiendas" }));
         comboBoxTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxTablaActionPerformed(evt);
@@ -103,23 +118,24 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(497, 497, 497)
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBoxTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28))
+                        .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCargar)
                     .addComponent(comboBoxTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

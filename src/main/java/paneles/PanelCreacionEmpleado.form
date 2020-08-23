@@ -16,9 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="315" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -26,33 +27,33 @@
                   <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblTituloNuevaTienda" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCodigoEmpleado" alignment="1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="txtCancelar" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnRegistrarTienda" min="-2" pref="148" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="txtTienda" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtTelefonoEmpleado" alignment="1" max="32767" attributes="0"/>
                   <Component id="txtNIT" alignment="1" max="32767" attributes="0"/>
                   <Component id="txtDireccionEmpleado" alignment="1" max="32767" attributes="0"/>
-                  <Component id="txtDPI" alignment="1" max="32767" attributes="0"/>
-                  <Component id="txtNombreEmpleado" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtNombreEmpleado" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtDPI" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblTituloNuevaTienda" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCodigoEmpleado" alignment="0" min="-2" pref="305" max="-2" attributes="0"/>
                   <Component id="txtCorreoEmpleado" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtCancelar" min="-2" pref="144" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnRegistrarTienda" min="-2" pref="148" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="txtTienda" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="162" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
               <Component id="lblTituloNuevaTienda" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -89,17 +90,17 @@
                   <Component id="txtTelefonoEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtTienda" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRegistrarTienda" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="128" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
