@@ -16,5 +16,11 @@ public class RegistroProducto extends RegistroDatos{
     public RegistroProducto() {
         setSubOrden("Producto (nombre_producto, fabricante, codigo_producto, cantidad, precio, codigo_tienda)");
     }
+    /**
+     * establecemos la suborden
+     */
+    public RegistroProducto(String suborden) {
+        setSubOrden(suborden);
+    }
     
 }

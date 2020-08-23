@@ -8,7 +8,7 @@ package entidades;
  * @author grifiun
  */
 public class Tienda {
-    private int codigo_tienda;
+    private String codigo_tienda;
     private String nombre_tienda;
     private String direccion_tienda;
     private String telefono_1;
@@ -16,7 +16,7 @@ public class Tienda {
     private String horario;
     private String correo; 
 
-    public Tienda(int codigo_tienda, String nombre_tienda, String direccion_tienda, String telefono_1, String telefono_2, String horario, String correo) {
+    public Tienda(String codigo_tienda, String nombre_tienda, String direccion_tienda, String telefono_1, String telefono_2, String horario, String correo) {
         this.codigo_tienda = codigo_tienda;
         this.nombre_tienda = nombre_tienda;
         this.direccion_tienda = direccion_tienda;
@@ -26,11 +26,11 @@ public class Tienda {
         this.correo = correo;
     }
 
-    public int getCodigo_tienda() {
+    public String getCodigo_tienda() {
         return codigo_tienda;
     }
 
-    public void setCodigo_tienda(int codigo_tienda) {
+    public void setCodigo_tienda(String codigo_tienda) {
         this.codigo_tienda = codigo_tienda;
     }
 

@@ -22,7 +22,7 @@ public class IsNum {
      * 1: integer
      * @return 
      */
-    public static int isNum(String palabra, String tipo) {
+    public int isNum(String palabra, String tipo) {
         int resultado;//declaramos la variable a retornar
         try {
             if(tipo.equalsIgnoreCase(DECIMAL))

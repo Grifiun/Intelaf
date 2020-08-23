@@ -8,16 +8,16 @@ package entidades;
  * @author grifiun
  */
 public class Empleado {
-    private int codigo_empleado;
+    private String codigo_empleado;
     private String nombre_empleado;
     private String dpi;
     private String correo_empleado;
     private String dirreccion_empleado;
     private String nit_empleado;
     private String telefono_empleado;
-    private int codigo_tienda;
+    private String codigo_tienda;
 
-    public Empleado(int codigo_empleado, String nombre_empleado, String dpi, String correo_empleado, String dirreccion_empleado, String nit_empleado, String telefono_empleado, int codigo_tienda) {
+    public Empleado(String codigo_empleado, String nombre_empleado, String dpi, String correo_empleado, String dirreccion_empleado, String nit_empleado, String telefono_empleado, String codigo_tienda) {
         this.codigo_empleado = codigo_empleado;
         this.nombre_empleado = nombre_empleado;
         this.dpi = dpi;
@@ -28,11 +28,11 @@ public class Empleado {
         this.codigo_tienda = codigo_tienda;
     }
 
-    public int getCodigo_empleado() {
+    public String getCodigo_empleado() {
         return codigo_empleado;
     }
 
-    public void setCodigo_empleado(int codigo_empleado) {
+    public void setCodigo_empleado(String codigo_empleado) {
         this.codigo_empleado = codigo_empleado;
     }
 
@@ -84,13 +84,12 @@ public class Empleado {
         this.telefono_empleado = telefono_empleado;
     }
 
-    public int getCodigo_tienda() {
+    public String getCodigo_tienda() {
         return codigo_tienda;
     }
 
-    public void setCodigo_tienda(int codigo_tienda) {
+    public void setCodigo_tienda(String codigo_tienda) {
         this.codigo_tienda = codigo_tienda;
-    }
-    
+    }    
     
 }
