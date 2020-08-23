@@ -7,6 +7,7 @@ package paneles;
 
 import graficos.MenuPrincipal;
 import static graficos.MenuPrincipal.contenedorPanel;
+import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -47,7 +48,9 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
         tablaAux.setLayout(null);
         tablaAux.setBounds(0, 0, 680, 330);
         
-        panelParaTabla.add(tablaAux);        
+        panelParaTabla.setLayout(new BorderLayout());
+        panelParaTabla.add(tablaAux.getTableHeader(), BorderLayout.PAGE_START);
+        panelParaTabla.add(tablaAux, BorderLayout.CENTER);        
     }
     
     public void prepararPanelTabla(){
