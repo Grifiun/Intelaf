@@ -26,13 +26,18 @@
                       <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnIngresarProducto" min="-2" pref="188" max="-2" attributes="0"/>
-                          <Component id="btnIngresarTienda" min="-2" pref="188" max="-2" attributes="0"/>
-                          <Component id="btnIngresarProducto1" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
-                          <Component id="btnIngresarProducto2" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="btnIngresarTienda" min="-2" pref="188" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnIngresarProducto3" min="-2" pref="188" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnIngresarEmpleado" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
+                          <Component id="btnIngresarCliente" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
+                          <Component id="btnVerRegistros" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="276" max="32767" attributes="0"/>
+              <EmptySpace pref="201" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,14 +47,19 @@
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnIngresarTienda" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnIngresarTienda" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnIngresarProducto3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnIngresarProducto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnIngresarProducto1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnIngresarEmpleado" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnIngresarProducto2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="180" max="32767" attributes="0"/>
+              <Component id="btnIngresarCliente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnVerRegistros" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="144" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,20 +89,36 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarProductoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnIngresarProducto1">
+    <Component class="javax.swing.JButton" name="btnIngresarEmpleado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresar Empleado"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarProducto1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarEmpleadoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnIngresarProducto2">
+    <Component class="javax.swing.JButton" name="btnIngresarCliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresar Cliente"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarProducto2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarClienteActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnIngresarProducto3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Modificar Tienda"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarProducto3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnVerRegistros">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver registros"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerRegistrosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
