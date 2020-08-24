@@ -69,7 +69,7 @@ public class PanelEmpleado extends javax.swing.JPanel {
             }
         });
 
-        btnIngresarProducto3.setText("Modificar Tienda");
+        btnIngresarProducto3.setText("Ingresar Pedido");
         btnIngresarProducto3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarProducto3ActionPerformed(evt);
@@ -145,7 +145,8 @@ public class PanelEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnIngresarClienteActionPerformed
 
     private void btnIngresarProducto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProducto3ActionPerformed
-        // TODO add your handling code here:
+       PanelCrearPedido cp = new PanelCrearPedido();
+       MenuPrincipal.cargarPanel(cp);
     }//GEN-LAST:event_btnIngresarProducto3ActionPerformed
 
     private void btnVerRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRegistrosActionPerformed

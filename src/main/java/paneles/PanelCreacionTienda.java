@@ -40,9 +40,7 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtDireccionTienda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtTelefono1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtTelefono2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnRegistrarTienda = new javax.swing.JButton();
         txtHorario = new javax.swing.JTextField();
@@ -52,6 +50,8 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
         txtCancelar = new javax.swing.JButton();
         txtCodigoTienda = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        txtTelefono1 = new javax.swing.JFormattedTextField();
+        txtTelefono2 = new javax.swing.JFormattedTextField();
 
         lblTituloNuevaTienda.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lblTituloNuevaTienda.setText("INGRESO NUEVA TIENDA");
@@ -66,19 +66,7 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
 
         jLabel3.setText("*Direccion:");
 
-        txtTelefono1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefono1ActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("*Telefono 1:");
-
-        txtTelefono2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefono2ActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Telefono 2:");
 
@@ -95,7 +83,7 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("horario");
+        jLabel6.setText("Horario:");
 
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +91,7 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("correo");
+        jLabel7.setText("Correo:");
 
         txtCancelar.setText("Cancelar");
         txtCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,29 +102,30 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
 
         jLabel8.setText("*Cod tienda");
 
+        txtTelefono1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtTelefono2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(342, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(308, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTituloNuevaTienda)
+                        .addGap(54, 54, 54))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3))
-                                .addGap(15, 15, 15))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtCodigoTienda)
                             .addGroup(layout.createSequentialGroup()
@@ -145,67 +134,56 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
                                 .addComponent(btnRegistrarTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtCorreo)
                             .addComponent(txtHorario)
-                            .addComponent(txtTelefono2)
                             .addComponent(txtDireccionTienda)
                             .addComponent(txtNombreTienda)
-                            .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTituloNuevaTienda)
-                        .addGap(54, 54, 54)))
-                .addGap(266, 266, 266))
+                            .addComponent(txtTelefono1)
+                            .addComponent(txtTelefono2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(296, 296, 296))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(115, 115, 115)
                 .addComponent(lblTituloNuevaTienda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCodigoTienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigoTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombreTienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDireccionTienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccionTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCancelar)
                     .addComponent(btnRegistrarTienda))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDireccionTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionTiendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionTiendaActionPerformed
-
-    private void txtTelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefono1ActionPerformed
-
-    private void txtTelefono2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefono2ActionPerformed
 
     private void txtHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHorarioActionPerformed
         // TODO add your handling code here:
@@ -248,6 +226,9 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
             //REGISTRAMOS LA TIENDA
             RegistroDatos regAux = new RegistroTienda(auxiliarSubDatos.getSubOrden());//Le agregamos la suborden
             regAux.registrarDatos(auxiliarSubDatos.getDatos());//creamos el registro con los datos
+            
+            PanelCreacionTiempoEnvio ct = new PanelCreacionTiempoEnvio(entidadAux.getCodigo_tienda());
+            MenuPrincipal.cargarPanel(ct);
        }
     }//GEN-LAST:event_btnRegistrarTiendaActionPerformed
 
@@ -268,7 +249,7 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
     private javax.swing.JTextField txtDireccionTienda;
     private javax.swing.JTextField txtHorario;
     private javax.swing.JTextField txtNombreTienda;
-    private javax.swing.JTextField txtTelefono1;
-    private javax.swing.JTextField txtTelefono2;
+    private javax.swing.JFormattedTextField txtTelefono1;
+    private javax.swing.JFormattedTextField txtTelefono2;
     // End of variables declaration//GEN-END:variables
 }

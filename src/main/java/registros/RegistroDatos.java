@@ -32,6 +32,36 @@ public class RegistroDatos extends conection_data_base.Consulta{
         registrarOrden(datos, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
     }
     
+    /**
+     * se actualiza la tabla en el atributo seleccioado donde
+     * los datos sean pertenecientes a la pk
+     * @param datos
+     * @param tabla
+     * @param atributo
+     * @param pk 
+     */
+    public void actualizarDatos(ArrayList<String> datos, String tabla, String atributo, String pk) {
+        //creamos la orden a enviar
+        String orden = "UPDATE "+tabla+" SET "+atributo+ " = ? WHERE "+pk+" = ?";
+        registrarOrden(datos, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
+    }
+    
+    /**
+     * Actualizamos datos para tablas con 2 primary keys
+     * se actualiza la tabla en el atributo seleccioado donde
+     * los datos sean pertenecientes a la pk
+     * @param datos
+     * @param tabla
+     * @param atributo
+     * @param pk
+     * @param pk2 
+     */
+    public void actualizarDatos(ArrayList<String> datos, String tabla, String atributo, String pk, String pk2) {
+        //creamos la orden a enviar
+        String orden = "UPDATE "+tabla+" SET "+atributo+ " = ? WHERE "+pk+" = ? AND "+pk2+" = ?";
+        registrarOrden(datos, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
+    }
+    
     
     /**
      * En esta funcion se verificará la existencia de un registro

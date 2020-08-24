@@ -99,7 +99,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(0, 558, Short.MAX_VALUE))
+                .addGap(0, 579, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,7 +155,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     private void initContenedorPaneles() {        
         contenedorPanel = new JScrollPane();   
-        contenedorPanel.setBounds(2, 25, 1005, 555);//Agregamos posicion y tamano
+        contenedorPanel.setBounds(2, 25, 1030, 575);//Agregamos posicion y tamano
         contenedorPanel.setBorder(new LineBorder(getBackground()));
         add(contenedorPanel);
     }

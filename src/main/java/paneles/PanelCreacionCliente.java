@@ -35,22 +35,22 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTituloNuevaTienda = new javax.swing.JLabel();
-        txtTelefonoCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnRegistrarTienda = new javax.swing.JButton();
-        txtNITCliente = new javax.swing.JTextField();
         txtDireccionCliente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtDPICliente = new javax.swing.JTextField();
         txtCorreoCliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtCreditoCliente = new javax.swing.JTextField();
         txtCancelar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtNombreCliente = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        txtCreditoCliente = new javax.swing.JFormattedTextField();
+        txtDPICliente = new javax.swing.JFormattedTextField();
+        txtNITCliente = new javax.swing.JFormattedTextField();
+        txtTelefonoCliente = new javax.swing.JFormattedTextField();
 
         lblTituloNuevaTienda.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lblTituloNuevaTienda.setText("INGRESO NUEVO CLIENTE");
@@ -64,12 +64,6 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
             }
         });
 
-        txtNITCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNITClienteActionPerformed(evt);
-            }
-        });
-
         txtDireccionCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionClienteActionPerformed(evt);
@@ -80,12 +74,6 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
 
         jLabel6.setText("*NIT:");
 
-        txtDPICliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDPIClienteActionPerformed(evt);
-            }
-        });
-
         txtCorreoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoClienteActionPerformed(evt);
@@ -95,12 +83,6 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
         jLabel4.setText("Correo:");
 
         jLabel7.setText("*Telefono:");
-
-        txtCreditoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCreditoClienteActionPerformed(evt);
-            }
-        });
 
         txtCancelar.setText("Cancelar");
         txtCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,12 +95,20 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
 
         jLabel8.setText("Credito:");
 
+        txtCreditoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtDPICliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtNITCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtTelefonoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(355, Short.MAX_VALUE)
+                .addContainerGap(334, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel2)
@@ -129,58 +119,58 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNITCliente)
+                    .addComponent(txtDPICliente)
+                    .addComponent(txtCreditoCliente)
                     .addComponent(lblTituloNuevaTienda)
                     .addComponent(txtNombreCliente, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtCorreoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtDireccionCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCreditoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNITCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDPICliente, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(txtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRegistrarTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(268, 268, 268))
+                        .addComponent(btnRegistrarTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(289, 289, 289))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(113, 113, 113)
                 .addComponent(lblTituloNuevaTienda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNITCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNITCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDPICliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDPICliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCreditoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCreditoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarTienda)
                     .addComponent(txtCancelar))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -210,25 +200,13 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnRegistrarTiendaActionPerformed
 
-    private void txtNITClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNITClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNITClienteActionPerformed
-
     private void txtDireccionClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionClienteActionPerformed
 
-    private void txtDPIClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDPIClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDPIClienteActionPerformed
-
     private void txtCorreoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoClienteActionPerformed
-
-    private void txtCreditoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCreditoClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCreditoClienteActionPerformed
 
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
         PanelEmpleado panelEmpleado = new PanelEmpleado();
@@ -248,11 +226,11 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
     private javax.swing.JLabel lblTituloNuevaTienda;
     private javax.swing.JButton txtCancelar;
     private javax.swing.JTextField txtCorreoCliente;
-    private javax.swing.JTextField txtCreditoCliente;
-    private javax.swing.JTextField txtDPICliente;
+    private javax.swing.JFormattedTextField txtCreditoCliente;
+    private javax.swing.JFormattedTextField txtDPICliente;
     private javax.swing.JTextField txtDireccionCliente;
-    private javax.swing.JTextField txtNITCliente;
+    private javax.swing.JFormattedTextField txtNITCliente;
     private javax.swing.JTextField txtNombreCliente;
-    private javax.swing.JTextField txtTelefonoCliente;
+    private javax.swing.JFormattedTextField txtTelefonoCliente;
     // End of variables declaration//GEN-END:variables
 }

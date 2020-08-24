@@ -10,9 +10,9 @@ package entidades;
 public class Tiempo_envio {
     private String tienda_1;
     private String tienda_2;
-    private int tiempo;
+    private String tiempo;
 
-    public Tiempo_envio(String tienda_1, String tienda_2, int tiempo) {
+    public Tiempo_envio(String tienda_1, String tienda_2, String tiempo) {
         this.tienda_1 = tienda_1;
         this.tienda_2 = tienda_2;
         this.tiempo = tiempo;
@@ -34,11 +34,11 @@ public class Tiempo_envio {
         this.tienda_2 = tienda_2;
     }
 
-    public int getTiempo() {
+    public String getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(int tiempo) {
+    public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
     }
     
