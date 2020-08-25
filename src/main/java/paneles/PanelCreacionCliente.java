@@ -8,6 +8,9 @@ package paneles;
 import entidades.Cliente;
 import funciones.SubStringDatos;
 import graficos.MenuPrincipal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import registros.RegistroCliente;
 import registros.RegistroDatos;
@@ -95,7 +98,7 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
 
         jLabel8.setText("Credito:");
 
-        txtCreditoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtCreditoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter((DecimalFormat)NumberFormat.getNumberInstance(Locale.US))));
 
         txtDPICliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 

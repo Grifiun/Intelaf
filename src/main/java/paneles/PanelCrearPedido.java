@@ -10,7 +10,10 @@ import entidades.Subpedido;
 import funciones.ComboBoxCargarDato;
 import funciones.SubStringDatos;
 import graficos.MenuPrincipal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.runtime.JSType;
@@ -120,7 +123,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
         txtCodPedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        txtAnticipo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtAnticipo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter((DecimalFormat)NumberFormat.getNumberInstance(Locale.US))));
 
         boxCodTiendaOrigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +135,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
         jLabel11.setText("*Credito a usar:");
 
-        txtCreditoAUsar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtCreditoAUsar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter((DecimalFormat)NumberFormat.getNumberInstance(Locale.US))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -250,15 +253,33 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
     private void btnRegistrarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTiendaActionPerformed
         conection_data_base.Consulta.mensajesEmergentes = false;
-        if(((Double.parseDouble(lblPrecio.getText()))/4) > Double.parseDouble(txtAnticipo.getText())){
-            JOptionPane.showMessageDialog(this, "El anticipo debe de ser minimo del 25%");
-        }else{
-            if(registrarPedido()){//Se realiza el registro del pedido y si se realiza con exito
-            //registramaos los subpedidos
-            registrarSubPedidos();
-            }else{
-                JOptionPane.showInternalMessageDialog(this, "Error al realizar el registro");
-            }        
+        try{
+            if(((Double.parseDouble(lblPrecio.getText()))/4) > Double.parseDouble(txtAnticipo.getText())){
+                JOptionPane.showMessageDialog(this, "El anticipo debe de ser minimo del 25%");
+            }else{  
+                registrarPedido();
+                
+                try{//Se verifica si el pedido se registro  
+                    RegistroDatos regAux = new RegistroDatos();//Le agregamos la suborden
+                    ArrayList<String> datos = new ArrayList();
+                    datos.add(toString().valueOf(txtCodPedido.getText()));
+                    
+                    if(regAux.verificarExistenciaRegisgtro("SELECT codigo_pedido FROM Pedido WHERE codigo_pedido = ?", datos)){
+                        //Si el registro se hizo de forma correcta cerramos el panel y nos pasamos a otro
+                        JOptionPane.showMessageDialog(this, "REGISTRO HECHO CON EXITO");
+                        PanelEmpleado panel = new PanelEmpleado();
+                        MenuPrincipal.cargarPanel(panel);
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Error al realizar el registro");
+                    }
+                }catch(Exception ex){
+                    System.out.println("Se produjo un error al verificar el exito del registro");
+                }
+                
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Error al realizar el registro");
         }
         
         
@@ -270,7 +291,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
      * Se registran los pedidos
      * @return 
      */
-    private boolean registrarPedido(){
+    private void registrarPedido(){
         Pedido entidadAux = new Pedido(txtCodPedido.getText(), lblPrecio.getText(), "ACTIVO", txtFecha.getText(),
                 txtAnticipo.getText(), String.valueOf(boxCodTiendaOrigen.getSelectedItem()),  String.valueOf(boxCodTiendaDestino.getSelectedItem()), 
                 txtNIT.getText(), txtCreditoAUsar.getText());
@@ -279,34 +300,54 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                  ||  entidadAux.getCodigo_tienda_destino().isEmpty() || entidadAux.getNit_cliente().isEmpty()){
             JOptionPane.showMessageDialog(null, "Ingrese todos los campos del pedido");
         }else{
-            //instanciamos y agregamos todos los datos
-            SubStringDatos auxiliarSubDatos = new SubStringDatos("Pedido (");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_pedido(), "codigo_pedido");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getEstado(), ", estado");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getFecha(), ", fecha");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getAnticipo(), ", anticipo");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_origen(), ", codigo_tienda_1");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_destino(), ", codigo_tienda_2");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_destino(), ", codigo_tienda_destino");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_destino(), ", credito_usado_anticipo");
             
-            //REGISTRAMOS EL CLIENTE
-            RegistroDatos regAux = new RegistroPedido(auxiliarSubDatos.getSubOrden());//Le agregamos la suborden
-            regAux.registrarDatos(auxiliarSubDatos.getDatos());//creamos el registro con los datos
-            
-            ArrayList<String> datos = new ArrayList();
-            datos.add(entidadAux.getCodigo_pedido());
-            
-            try{//Se verifica si el pedido se registro
-                if(regAux.verificarExistenciaRegisgtro("SELECT codigo_pedido FROM Pedido WHERE codigo_pedido = ?", datos)){
-                    return true;
+            RegistroDatos rd = new RegistroDatos();
+            try{
+                String[] creditoActualCliente = rd.obtenerDatos("Cliente", "credito", " WHERE nit = '"+txtNIT.getText()+"'");
+                if(Double.parseDouble(entidadAux.getCredito_usado()) > Double.parseDouble(creditoActualCliente[0])){//Revisamos si el credito actual del cliente lo cubre
+                    JOptionPane.showMessageDialog(null, "El credito que quiere usar es mayor al credito actual: "+creditoActualCliente[0]);
+                }else{
+                //instanciamos y agregamos todos los datos
+                    SubStringDatos auxiliarSubDatos = new SubStringDatos("Pedido (");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_pedido(), "codigo_pedido");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getEstado(), ", estado");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getFecha(), ", fecha");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getAnticipo(), ", anticipo");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_origen(), ", codigo_tienda_1");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_destino(), ", codigo_tienda_2");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_destino(), ", codigo_tienda_destino");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getNit_cliente(), ", nit_cliente");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCredito_usado(), ", credito_usado_anticipo");
+
+                    //REGISTRAMOS EL CLIENTE
+                    RegistroDatos regAux = new RegistroPedido(auxiliarSubDatos.getSubOrden());//Le agregamos la suborden
+                    regAux.registrarDatos(auxiliarSubDatos.getDatos());//creamos el registro con los datos
+
+                    ArrayList<String> datos = new ArrayList();
+                    datos.add(entidadAux.getCodigo_pedido());
+
+                    try{//Se verifica si el pedido se registro
+                        if(regAux.verificarExistenciaRegisgtro("SELECT codigo_pedido FROM Pedido WHERE codigo_pedido = ?", datos)){
+                            datos.clear();//removemos los datos del arraylist
+                            datos.add(String.valueOf(Double.parseDouble(creditoActualCliente[0]) - Double.parseDouble(entidadAux.getCredito_usado())));//actualizamos el credito
+                            datos.add(txtNIT.getText());
+                            
+                            rd.actualizarDatos(datos, "Cliente", "credito ", "nit");
+                            
+                            registrarSubPedidos();
+                        }
+                    }catch(Exception ex){
+                        System.out.println("Se produjo un error al verificar el exito del registro");
+                    }
+                
                 }
             }catch(Exception ex){
-                System.out.println("Se produjo un error al verificar el exito del registro");
+            
             }
+            
+            
+            
         }
-        
-        return false;
     }
     private void registrarSubPedidos(){
         for(int i = 0; i < subpedidos.size(); i++){            
@@ -319,6 +360,21 @@ public class PanelCrearPedido extends javax.swing.JPanel {
             //REGISTRAMOS EL CLIENTE
             RegistroDatos regAux = new RegistroSubPedido();//Le agregamos la suborden
             regAux.registrarDatos(datos);//creamos el registro con los datos
+            
+            RegistroDatos rd = new RegistroDatos();
+            datos.clear();//limpiamos el arrayList
+            //Obtenemos la existencia actual
+            String[] cantidadActual= rd.obtenerDatos("Producto", "cantidad", " WHERE codigo_producto = '"
+                    +subpedidos.get(i).getCodigo_producto()+"' AND codigo_tienda = '"+String.valueOf(boxCodTiendaOrigen.getSelectedItem())+"'");
+            //agregamos la nueva cantidad
+            datos.add(String.valueOf( Double.parseDouble(cantidadActual[0]) - Double.parseDouble(subpedidos.get(i).getCantidad()) ));//actualizamos el credito
+            
+            //agregamos el codigo del producto
+            datos.add(subpedidos.get(i).getCodigo_producto());
+            //agregamos el codigo de la tienda
+            datos.add(String.valueOf(boxCodTiendaOrigen.getSelectedItem()));
+                        
+            rd.actualizarDatos(datos, "Producto", "cantidad ", "codigo_producto", "codigo_tienda");                            
         }
     }
     private void boxCodTiendaOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCodTiendaOrigenActionPerformed
@@ -334,13 +390,15 @@ public class PanelCrearPedido extends javax.swing.JPanel {
         // Agregamos el subpedido al arrayList
         RegistroDatos rd = new RegistroDatos();
         String[] cantidadYPrecio;
+        
         //Los datos devueltos por la funcion son
-        //pos 0: Cantidad del producto
+        //pos 0: Cantidad del producto 
         //pos 1: Precio del producto
         if(txtCodPedido.getText().isEmpty() || txtCantidad.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Rellene todos los formularios");
         }else{
-            cantidadYPrecio = rd.obtenerDatos("Producto", "cantidad, precio", " WHERE codigo_producto = '"+String.valueOf(boxCodProducto.getSelectedItem())+"'");
+            cantidadYPrecio = rd.obtenerDatos("Producto", "cantidad, precio", " WHERE codigo_producto = '"+String.valueOf(boxCodProducto.getSelectedItem())+
+                    "' AND codigo_tienda = '"+String.valueOf(boxCodTiendaOrigen.getSelectedItem())+"'");
             try{
                 if(Integer.parseInt(txtCantidad.getText()) > Integer.parseInt(cantidadYPrecio[0])){
                     JOptionPane.showMessageDialog(this, "La cantidad ingresada es superior a la cantidad existente: "+cantidadYPrecio[0]);                
@@ -355,6 +413,9 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                     double aux = Double.parseDouble(lblPrecio.getText()) + subtotal;
                     lblPrecio.setText(String.valueOf(aux));
                 }
+                //una vez se agregue un producto ya no se pueden cambiar las tiendas
+                //boxCodTiendaOrigen.setEnabled(false);
+                //boxCodTiendaDestino.setEnabled(false);
             }catch(Exception ex){
                 System.out.println("no se pudo completar la accion");
             }
