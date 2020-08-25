@@ -25,6 +25,13 @@ public class RegistroPedido extends RegistroDatos{
     }
     
     /**
+     * Se registran los pedidos
+     */
+    public RegistroPedido(String suborden) {
+        setSubOrden(suborden);        
+    }
+    
+    /**
      * Funcion de tipo booleano
      * Si es verdadero entonces ya existe un Pedido con ese codigo
      * Si es falso entonces aun no existe un Pedido con ese codigo

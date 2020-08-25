@@ -5,19 +5,35 @@
  */
 package paneles;
 
+import entidades.Pedido;
+import entidades.Subpedido;
+import funciones.ComboBoxCargarDato;
+import funciones.SubStringDatos;
 import graficos.MenuPrincipal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Locale;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import jdk.nashorn.internal.runtime.JSType;
+import registros.RegistroDatos;
+import registros.RegistroPedido;
+import registros.RegistroSubPedido;
 
 /**
  *
  * @author grifiun
  */
 public class PanelCrearPedido extends javax.swing.JPanel {
-
+    ArrayList<Subpedido> subpedidos = new ArrayList();
     /**
      * Creates new form PanelCrearPedido
      */
     public PanelCrearPedido() {
         initComponents();
+        cargarCodigosTiendas();
+        //cargarProductosTiendaDeOrigen();
     }
 
     /**
@@ -29,7 +45,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtCorreoCliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         lblTituloNuevaTienda = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -42,23 +57,20 @@ public class PanelCrearPedido extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         lblTituloNuevaTienda1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAgregarProducto = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
         txtFecha = new javax.swing.JFormattedTextField();
         txtCodPedido = new javax.swing.JFormattedTextField();
         txtAnticipo = new javax.swing.JFormattedTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         boxCodTiendaDestino = new javax.swing.JComboBox<>();
         boxCodTiendaOrigen = new javax.swing.JComboBox<>();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-
-        txtCorreoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoClienteActionPerformed(evt);
-            }
-        });
+        txtCantidad = new javax.swing.JFormattedTextField();
+        boxCodProducto = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        txtCreditoAUsar = new javax.swing.JFormattedTextField();
+        txtNIT = new javax.swing.JTextField();
 
         jLabel4.setText("*Cod. Producto:");
 
@@ -96,7 +108,12 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
         jLabel9.setText("*Cantidad:");
 
-        jButton1.setText("Agregar producto");
+        btnAgregarProducto.setText("Agregar producto");
+        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Total: Q.");
 
@@ -106,11 +123,19 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
         txtCodPedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        txtAnticipo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtAnticipo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter((DecimalFormat)NumberFormat.getNumberInstance(Locale.US))));
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        boxCodTiendaOrigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCodTiendaOrigenActionPerformed(evt);
+            }
+        });
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtCantidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        jLabel11.setText("*Credito a usar:");
+
+        txtCreditoAUsar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter((DecimalFormat)NumberFormat.getNumberInstance(Locale.US))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -127,21 +152,22 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(jLabel4)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel11))
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFecha)
-                    .addComponent(txtCorreoCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloNuevaTienda1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCodPedido, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAnticipo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(boxCodTiendaDestino, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(boxCodTiendaOrigen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTituloNuevaTienda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCodPedido)
+                    .addComponent(txtAnticipo)
+                    .addComponent(boxCodTiendaDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(boxCodTiendaOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCantidad)
+                    .addComponent(boxCodProducto, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnAgregarProducto))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +183,8 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                                     .addGap(170, 170, 170)
                                     .addComponent(jLabel10))))
                         .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtCreditoAUsar)
+                    .addComponent(txtNIT))
                 .addGap(289, 289, 289))
         );
         layout.setVerticalGroup(
@@ -177,6 +204,10 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAnticipo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtCreditoAUsar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boxCodTiendaOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,36 +218,33 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloNuevaTienda1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(boxCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnAgregarProducto)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel10)
                     .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistrarTienda)
                     .addComponent(txtCancelar))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtCorreoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoClienteActionPerformed
 
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
         PanelEmpleado panelEmpleado = new PanelEmpleado();
@@ -224,41 +252,221 @@ public class PanelCrearPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCancelarActionPerformed
 
     private void btnRegistrarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTiendaActionPerformed
+        conection_data_base.Consulta.mensajesEmergentes = false;
+        try{
+            if(((Double.parseDouble(lblPrecio.getText()))/4) > Double.parseDouble(txtAnticipo.getText())){
+                JOptionPane.showMessageDialog(this, "El anticipo debe de ser minimo del 25%");
+            }else{  
+                registrarPedido();
+                
+                try{//Se verifica si el pedido se registro  
+                    RegistroDatos regAux = new RegistroDatos();//Le agregamos la suborden
+                    ArrayList<String> datos = new ArrayList();
+                    datos.add(toString().valueOf(txtCodPedido.getText()));
+                    
+                    if(regAux.verificarExistenciaRegisgtro("SELECT codigo_pedido FROM Pedido WHERE codigo_pedido = ?", datos)){
+                        //Si el registro se hizo de forma correcta cerramos el panel y nos pasamos a otro
+                        JOptionPane.showMessageDialog(this, "REGISTRO HECHO CON EXITO");
+                        PanelEmpleado panel = new PanelEmpleado();
+                        MenuPrincipal.cargarPanel(panel);
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Error al realizar el registro");
+                    }
+                }catch(Exception ex){
+                    System.out.println("Se produjo un error al verificar el exito del registro");
+                }
+                
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Error al realizar el registro");
+        }
         
-        /*
-        Cliente entidadAux = new Cliente(txtNITCliente.getText(), txtNombreCliente.getText(), txtTelefonoCliente.getText(), txtCorreoCliente.getText(),
-            txtDireccionCliente.getText(), txtDPICliente.getText(), txtCreditoCliente.getText());
-        //Revisamos los campos obligatorios, si están llenos o vacíos
-        if(entidadAux.getNit().isEmpty() || entidadAux.getNombre_cliente().isEmpty() || entidadAux.getTelefono_cliente().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Ingrese todos los datos obligatorios (*)");
-        }else{
-            //instanciamos y agregamos todos los datos
-            SubStringDatos auxiliarSubDatos = new SubStringDatos("Cliente (");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getNit(), "nit");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getNombre_cliente(), ", nombre_cliente");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getTelefono_cliente(), ", telefono_cliente");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCorreo_cliente(), ", correo_cliente");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getDirreccion_cliente(), ", direccion_cliente");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getDpi(), ", dpi");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCredito(), ", credito");
-
-            //REGISTRAMOS EL CLIENTE
-            RegistroDatos regAux = new RegistroCliente(auxiliarSubDatos.getSubOrden());//Le agregamos la suborden
-            regAux.registrarDatos(auxiliarSubDatos.getDatos());//creamos el registro con los datos
-
-        }*/
+        
+        
+        conection_data_base.Consulta.mensajesEmergentes = true;
     }//GEN-LAST:event_btnRegistrarTiendaActionPerformed
+    
+    /**
+     * Se registran los pedidos
+     * @return 
+     */
+    private void registrarPedido(){
+        Pedido entidadAux = new Pedido(txtCodPedido.getText(), lblPrecio.getText(), "ACTIVO", txtFecha.getText(),
+                txtAnticipo.getText(), String.valueOf(boxCodTiendaOrigen.getSelectedItem()),  String.valueOf(boxCodTiendaDestino.getSelectedItem()), 
+                txtNIT.getText(), txtCreditoAUsar.getText());
+        //Revisamos los campos obligatorios, si están llenos o vacíos
+        if(entidadAux.getCodigo_pedido().isEmpty() || entidadAux.getFecha().isEmpty() || entidadAux.getAnticipo().isEmpty() || entidadAux.getCodigo_tienda_origen().isEmpty()
+                 ||  entidadAux.getCodigo_tienda_destino().isEmpty() || entidadAux.getNit_cliente().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese todos los campos del pedido");
+        }else{
+            
+            RegistroDatos rd = new RegistroDatos();
+            try{
+                String[] creditoActualCliente = rd.obtenerDatos("Cliente", "credito", " WHERE nit = '"+txtNIT.getText()+"'");
+                if(Double.parseDouble(entidadAux.getCredito_usado()) > Double.parseDouble(creditoActualCliente[0])){//Revisamos si el credito actual del cliente lo cubre
+                    JOptionPane.showMessageDialog(null, "El credito que quiere usar es mayor al credito actual: "+creditoActualCliente[0]);
+                }else{
+                //instanciamos y agregamos todos los datos
+                    SubStringDatos auxiliarSubDatos = new SubStringDatos("Pedido (");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_pedido(), "codigo_pedido");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getEstado(), ", estado");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getFecha(), ", fecha");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getAnticipo(), ", anticipo");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_origen(), ", codigo_tienda_1");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_destino(), ", codigo_tienda_2");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCodigo_tienda_destino(), ", codigo_tienda_destino");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getNit_cliente(), ", nit_cliente");
+                    auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCredito_usado(), ", credito_usado_anticipo");
 
+                    //REGISTRAMOS EL CLIENTE
+                    RegistroDatos regAux = new RegistroPedido(auxiliarSubDatos.getSubOrden());//Le agregamos la suborden
+                    regAux.registrarDatos(auxiliarSubDatos.getDatos());//creamos el registro con los datos
 
+                    ArrayList<String> datos = new ArrayList();
+                    datos.add(entidadAux.getCodigo_pedido());
+
+                    try{//Se verifica si el pedido se registro
+                        if(regAux.verificarExistenciaRegisgtro("SELECT codigo_pedido FROM Pedido WHERE codigo_pedido = ?", datos)){
+                            datos.clear();//removemos los datos del arraylist
+                            datos.add(String.valueOf(Double.parseDouble(creditoActualCliente[0]) - Double.parseDouble(entidadAux.getCredito_usado())));//actualizamos el credito
+                            datos.add(txtNIT.getText());
+                            
+                            rd.actualizarDatos(datos, "Cliente", "credito ", "nit");
+                            
+                            registrarSubPedidos();
+                        }
+                    }catch(Exception ex){
+                        System.out.println("Se produjo un error al verificar el exito del registro");
+                    }
+                
+                }
+            }catch(Exception ex){
+            
+            }
+            
+            
+            
+        }
+    }
+    private void registrarSubPedidos(){
+        for(int i = 0; i < subpedidos.size(); i++){            
+            //Subpedido (codigo_pedido, codigo_producto, cantidad, subtotal)
+            ArrayList<String> datos = new ArrayList();
+            datos.add(subpedidos.get(i).getCodigo_pedido());//Agregamos el codigo del pedido
+            datos.add(subpedidos.get(i).getCodigo_producto());//agregamos el codigo del producto
+            datos.add(subpedidos.get(i).getCantidad());//agregamos la cantidad
+            datos.add(subpedidos.get(i).getSubtotal());//agregamos el precio subtotal
+            //REGISTRAMOS EL CLIENTE
+            RegistroDatos regAux = new RegistroSubPedido();//Le agregamos la suborden
+            regAux.registrarDatos(datos);//creamos el registro con los datos
+            
+            RegistroDatos rd = new RegistroDatos();
+            datos.clear();//limpiamos el arrayList
+            //Obtenemos la existencia actual
+            String[] cantidadActual= rd.obtenerDatos("Producto", "cantidad", " WHERE codigo_producto = '"
+                    +subpedidos.get(i).getCodigo_producto()+"' AND codigo_tienda = '"+String.valueOf(boxCodTiendaOrigen.getSelectedItem())+"'");
+            //agregamos la nueva cantidad
+            datos.add(String.valueOf( Double.parseDouble(cantidadActual[0]) - Double.parseDouble(subpedidos.get(i).getCantidad()) ));//actualizamos el credito
+            
+            //agregamos el codigo del producto
+            datos.add(subpedidos.get(i).getCodigo_producto());
+            //agregamos el codigo de la tienda
+            datos.add(String.valueOf(boxCodTiendaOrigen.getSelectedItem()));
+                        
+            rd.actualizarDatos(datos, "Producto", "cantidad ", "codigo_producto", "codigo_tienda");                            
+        }
+    }
+    private void boxCodTiendaOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCodTiendaOrigenActionPerformed
+        // TODO add your handling code here:        
+        cargarProductosTiendaDeOrigen();//cargamos los productos cuando se cambie de tienda de origen
+    }//GEN-LAST:event_boxCodTiendaOrigenActionPerformed
+
+    /**
+     * Se crea y agrega una entidad de tipo Subpedido
+     * @param evt 
+     */
+    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+        // Agregamos el subpedido al arrayList
+        RegistroDatos rd = new RegistroDatos();
+        String[] cantidadYPrecio;
+        
+        //Los datos devueltos por la funcion son
+        //pos 0: Cantidad del producto 
+        //pos 1: Precio del producto
+        if(txtCodPedido.getText().isEmpty() || txtCantidad.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Rellene todos los formularios");
+        }else{
+            cantidadYPrecio = rd.obtenerDatos("Producto", "cantidad, precio", " WHERE codigo_producto = '"+String.valueOf(boxCodProducto.getSelectedItem())+
+                    "' AND codigo_tienda = '"+String.valueOf(boxCodTiendaOrigen.getSelectedItem())+"'");
+            try{
+                if(Integer.parseInt(txtCantidad.getText()) > Integer.parseInt(cantidadYPrecio[0])){
+                    JOptionPane.showMessageDialog(this, "La cantidad ingresada es superior a la cantidad existente: "+cantidadYPrecio[0]);                
+                }else{
+                    double subtotal = Integer.valueOf(txtCantidad.getText()) * Double.parseDouble(cantidadYPrecio[1]);
+                    //subtotal = cantidad * precio 
+                    JOptionPane.showMessageDialog(this, "El precio unitario del producto es de: "+cantidadYPrecio[1]+
+                            "\nLa cantidad ingresada es de "+txtCantidad.getText()+
+                            "\nEl subtotal es de "+subtotal);
+                    Subpedido auxsp = new Subpedido(txtCantidad.getText(), String.valueOf(subtotal), txtCodPedido.getText(), String.valueOf(boxCodProducto.getSelectedItem()));
+                    subpedidos.add(auxsp);//Agregamos la entidad creada al arrayList
+                    double aux = Double.parseDouble(lblPrecio.getText()) + subtotal;
+                    lblPrecio.setText(String.valueOf(aux));
+                }
+                //una vez se agregue un producto ya no se pueden cambiar las tiendas
+                //boxCodTiendaOrigen.setEnabled(false);
+                //boxCodTiendaDestino.setEnabled(false);
+            }catch(Exception ex){
+                System.out.println("no se pudo completar la accion");
+            }
+
+        }
+        
+    }//GEN-LAST:event_btnAgregarProductoActionPerformed
+    
+    /**
+     * Cargamos los codigos de las tiendas existentes a los 2 comboBox
+     */
+    private void cargarCodigosTiendas(){
+        ComboBoxCargarDato cargarDato = new ComboBoxCargarDato();
+        JComboBox cboxAux = new JComboBox();
+        cboxAux = cargarDato.cargar("codigo_tienda", "Tienda");//mandamos le nombre del atributo y nombre de la tabla
+        //Pasamos el contenido de un cbo auxiliar al que nos interesa
+        for (int i = 0; i < cboxAux.getItemCount(); i++) 
+        {
+            boxCodTiendaOrigen.addItem(String.valueOf(cboxAux.getItemAt(i)));
+            boxCodTiendaDestino.addItem(String.valueOf(cboxAux.getItemAt(i)));
+        }
+        boxCodTiendaDestino.setSelectedIndex(1);//colocamos el comboBox seleccionando el segundo item
+    }
+    
+    /**
+     * Cargamos los productos de la tienda de origen
+     */
+    private void cargarProductosTiendaDeOrigen(){
+        boxCodProducto.removeAllItems();
+        ComboBoxCargarDato cargarDato = new ComboBoxCargarDato();
+        JComboBox cboxAux = new JComboBox();
+        cboxAux = cargarDato.cargar("codigo_producto", "Producto", "codigo_tienda", String.valueOf(boxCodTiendaOrigen.getSelectedItem()));//mandamos le nombre del atributo y nombre de la tabla
+        //Pasamos el contenido de un cbo auxiliar al que nos interesa
+        for (int i = 0; i < cboxAux.getItemCount(); i++) 
+        {
+            boxCodProducto.addItem(String.valueOf(cboxAux.getItemAt(i)));
+        }
+        if(boxCodProducto.getItemCount() == 0){
+            JOptionPane.showMessageDialog(this, "Seleccione otra tienda de origen, la actual no tiene productos");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxCodProducto;
     private javax.swing.JComboBox<String> boxCodTiendaDestino;
     private javax.swing.JComboBox<String> boxCodTiendaOrigen;
+    private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnRegistrarTienda;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -272,8 +480,10 @@ public class PanelCrearPedido extends javax.swing.JPanel {
     private javax.swing.JLabel lblTituloNuevaTienda1;
     private javax.swing.JFormattedTextField txtAnticipo;
     private javax.swing.JButton txtCancelar;
+    private javax.swing.JFormattedTextField txtCantidad;
     private javax.swing.JFormattedTextField txtCodPedido;
-    private javax.swing.JTextField txtCorreoCliente;
+    private javax.swing.JFormattedTextField txtCreditoAUsar;
     private javax.swing.JFormattedTextField txtFecha;
+    private javax.swing.JTextField txtNIT;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,9 @@ package paneles;
 import entidades.Cliente;
 import funciones.SubStringDatos;
 import graficos.MenuPrincipal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import registros.RegistroCliente;
 import registros.RegistroDatos;
@@ -49,8 +52,8 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         txtCreditoCliente = new javax.swing.JFormattedTextField();
         txtDPICliente = new javax.swing.JFormattedTextField();
-        txtNITCliente = new javax.swing.JFormattedTextField();
         txtTelefonoCliente = new javax.swing.JFormattedTextField();
+        txtNITCliente = new javax.swing.JTextField();
 
         lblTituloNuevaTienda.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lblTituloNuevaTienda.setText("INGRESO NUEVO CLIENTE");
@@ -95,11 +98,9 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
 
         jLabel8.setText("Credito:");
 
-        txtCreditoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtCreditoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter((DecimalFormat)NumberFormat.getNumberInstance(Locale.US))));
 
         txtDPICliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        txtNITCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         txtTelefonoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
@@ -119,7 +120,6 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNITCliente)
                     .addComponent(txtDPICliente)
                     .addComponent(txtCreditoCliente)
                     .addComponent(lblTituloNuevaTienda)
@@ -130,7 +130,8 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
                         .addComponent(txtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRegistrarTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtTelefonoCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNITCliente))
                 .addGap(289, 289, 289))
         );
         layout.setVerticalGroup(
@@ -148,8 +149,8 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNITCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(txtNITCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDPICliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,7 +230,7 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtCreditoCliente;
     private javax.swing.JFormattedTextField txtDPICliente;
     private javax.swing.JTextField txtDireccionCliente;
-    private javax.swing.JFormattedTextField txtNITCliente;
+    private javax.swing.JTextField txtNITCliente;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JFormattedTextField txtTelefonoCliente;
     // End of variables declaration//GEN-END:variables

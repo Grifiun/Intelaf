@@ -33,7 +33,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
         "Cod. Producto,Cantidad,Precio,Nombre,Fabricante,Descripcion,Garantia,Se encuentra en".split(","),
         "Cod. Tienda 1,Cod. Tienda 2,Tiempo entre tiendas".split(","),
         "Cod. Compra,Efectivo usado,Credito usado,Precio Total,Cod. Tienda de compra,NIT Cliente,Cod. Pedido".split(","),
-        "Cod. Pedido,Estado,Fecha de pedido,Anticipo,Cod. Tienda 1,Cod. Tienda2,Cod. Tienda Destino,NIT Cliente".split(",")};
+        "Cod. Pedido,Estado,Fecha de pedido,Anticipo,Cod. Tienda 1,Cod. Tienda2,Cod. Tienda Destino,NIT Cliente,Credito Usado".split(",")};
     
     private final String[][] nombreAtributosTablas = { "codigo_tienda,nombre_tienda,direccion_tienda,telefono_1,telefono_2,horario,correo".split(","),
         "codigo_empleado,nombre_empleado,dpi,correo_empleado,direccion_empleado,nit_empleado,telefono_empleado,codigo_tienda".split(","),

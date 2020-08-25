@@ -7,12 +7,14 @@ package paneles;
 
 import conection_data_base.Consulta;
 import entidades.Tiempo_envio;
+import funciones.ComboBoxCargarDato;
 import graficos.MenuPrincipal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import registros.RegistroDatos;
 import registros.RegistroTiempo;
@@ -148,6 +150,12 @@ public class PanelCreacionTiempoEnvio extends javax.swing.JPanel {
             }
         });
 
+        cmbBoxTienda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBoxTiendaActionPerformed(evt);
+            }
+        });
+
         txtTiempoDias.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -252,6 +260,10 @@ public class PanelCreacionTiempoEnvio extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void cmbBoxTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxTiendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbBoxTiendaActionPerformed
+
     /**
      * Agregamos el codigo de la tienda a la que se le agregaran los tiempos de envio
      */
@@ -262,17 +274,17 @@ public class PanelCreacionTiempoEnvio extends javax.swing.JPanel {
     private void agregarCodTienda2() {
         
     }
-    
+    /**
+     * Cargamos las tiendas al comboBox 
+     */
     private void cargarTiendas() {        
-        try(ResultSet rs = Consulta.consultaOrden("SELECT codigo_tienda FROM Tienda")){
-            //Agregamos los codigos de las tiendas al comboBox
-            while(rs.next()){
-                if(rs.getString("codigo_tienda").equals(codigoTiendaActual) == false)
-                cmbBoxTienda.addItem(rs.getString("codigo_tienda"));
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelCreacionEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        ComboBoxCargarDato cargarDato = new ComboBoxCargarDato();
+        JComboBox cboxAux = new JComboBox();
+        cboxAux = cargarDato.cargar("codigo_tienda", "Tienda");//mandamos le nombre del atributo y nombre de la tabla
+        //Pasamos el contenido de un cbo auxiliar al que nos interesa
+        for (int i = 0; i < cboxAux.getItemCount(); i++) 
+        {
+            cmbBoxTienda.addItem(String.valueOf(cboxAux.getItemAt(i)));
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
