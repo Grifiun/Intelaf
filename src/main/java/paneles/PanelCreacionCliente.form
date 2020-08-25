@@ -29,7 +29,6 @@
               </Group>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txtNITCliente" max="32767" attributes="0"/>
                   <Component id="txtDPICliente" max="32767" attributes="0"/>
                   <Component id="txtCreditoCliente" max="32767" attributes="0"/>
                   <Component id="lblTituloNuevaTienda" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -42,6 +41,7 @@
                       <Component id="btnRegistrarTienda" min="-2" pref="148" max="-2" attributes="0"/>
                   </Group>
                   <Component id="txtTelefonoCliente" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtNITCliente" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
           </Group>
@@ -64,8 +64,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtNITCliente" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNITCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -183,19 +183,14 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="txtNITCliente">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#0" subtype="-1" type="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtTelefonoCliente">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
           <Format format="#0" subtype="-1" type="0"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNITCliente">
     </Component>
   </SubComponents>
 </Form>

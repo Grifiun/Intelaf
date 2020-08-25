@@ -7,12 +7,14 @@ package paneles;
 
 import conection_data_base.Consulta;
 import entidades.Producto;
+import funciones.ComboBoxCargarDato;
 import funciones.SubStringDatos;
 import graficos.MenuPrincipal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import registros.RegistroDatos;
 import registros.RegistroProducto;
@@ -242,15 +244,13 @@ public class PanelIngresarProducto extends javax.swing.JPanel {
      * Se cargan las tiendas en el ComboBox
      */
     private void cargarTiendas() {
-        
-        try(ResultSet rs = Consulta.consultaOrden("SELECT codigo_tienda FROM Tienda")){
-            //Agregamos los codigos de las tiendas al comboBox
-            while(rs.next()){
-                txtTienda.addItem(rs.getString("codigo_tienda"));
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelCreacionEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        ComboBoxCargarDato cargarDato = new ComboBoxCargarDato();
+        JComboBox cboxAux = new JComboBox();
+        cboxAux = cargarDato.cargar("codigo_tienda", "Tienda");//mandamos le nombre del atributo y nombre de la tabla
+        //Pasamos el contenido de un cbo auxiliar al que nos interesa
+        for (int i = 0; i < cboxAux.getItemCount(); i++) 
+        {
+            txtTienda.addItem(String.valueOf(cboxAux.getItemAt(i)));
         }
     }
 
