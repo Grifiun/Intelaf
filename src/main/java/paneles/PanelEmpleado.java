@@ -32,47 +32,17 @@ public class PanelEmpleado extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         btnIngresarTienda = new javax.swing.JButton();
-        btnIngresarProducto = new javax.swing.JButton();
-        btnIngresarEmpleado = new javax.swing.JButton();
-        btnIngresarCliente = new javax.swing.JButton();
-        btnIngresarProducto3 = new javax.swing.JButton();
         btnVerRegistros = new javax.swing.JButton();
+        btnPedidos = new javax.swing.JButton();
+        btnPedidos1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("EMPLEADO");
 
-        btnIngresarTienda.setText("Ingresar Tienda");
+        btnIngresarTienda.setText("Ingresar Registros");
         btnIngresarTienda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarTiendaActionPerformed(evt);
-            }
-        });
-
-        btnIngresarProducto.setText("Ingresar Producto");
-        btnIngresarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarProductoActionPerformed(evt);
-            }
-        });
-
-        btnIngresarEmpleado.setText("Ingresar Empleado");
-        btnIngresarEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarEmpleadoActionPerformed(evt);
-            }
-        });
-
-        btnIngresarCliente.setText("Ingresar Cliente");
-        btnIngresarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarClienteActionPerformed(evt);
-            }
-        });
-
-        btnIngresarProducto3.setText("Ingresar Pedido");
-        btnIngresarProducto3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarProducto3ActionPerformed(evt);
             }
         });
 
@@ -83,84 +53,78 @@ public class PanelEmpleado extends javax.swing.JPanel {
             }
         });
 
+        btnPedidos.setText("Pedidos");
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
+
+        btnPedidos1.setText("Ventas");
+        btnPedidos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidos1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(329, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel1))
-                    .addComponent(btnIngresarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnIngresarTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIngresarProducto3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnIngresarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(289, 289, 289))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(396, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(60, 60, 60))
+                    .addComponent(btnIngresarTienda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                    .addComponent(btnPedidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPedidos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerRegistros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(336, 336, 336))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(151, 151, 151)
+                .addContainerGap(142, Short.MAX_VALUE)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnIngresarTienda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIngresarTienda)
-                    .addComponent(btnIngresarProducto3))
+                .addComponent(btnPedidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnIngresarProducto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnIngresarEmpleado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnIngresarCliente)
+                .addComponent(btnPedidos1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVerRegistros)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addGap(230, 230, 230))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarTiendaActionPerformed
-        panelCTienda = new PanelCreacionTienda();
-        MenuPrincipal.cargarPanel(panelCTienda);
+        PanelIngresarRegistros panel = new PanelIngresarRegistros();
+        MenuPrincipal.cargarPanel(panel);
     }//GEN-LAST:event_btnIngresarTiendaActionPerformed
-
-    private void btnIngresarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProductoActionPerformed
-        PanelIngresarProducto panelProducto = new PanelIngresarProducto();
-        MenuPrincipal.cargarPanel(panelProducto);        
-    }//GEN-LAST:event_btnIngresarProductoActionPerformed
-
-    private void btnIngresarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarEmpleadoActionPerformed
-       PanelCreacionEmpleado panelCreacionEmp = new PanelCreacionEmpleado();
-       MenuPrincipal.cargarPanel(panelCreacionEmp);
-    }//GEN-LAST:event_btnIngresarEmpleadoActionPerformed
-
-    private void btnIngresarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarClienteActionPerformed
-       PanelCreacionCliente panelCreacionCliente = new PanelCreacionCliente();
-       MenuPrincipal.cargarPanel(panelCreacionCliente);
-    }//GEN-LAST:event_btnIngresarClienteActionPerformed
-
-    private void btnIngresarProducto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProducto3ActionPerformed
-       PanelCrearPedido cp = new PanelCrearPedido();
-       MenuPrincipal.cargarPanel(cp);
-    }//GEN-LAST:event_btnIngresarProducto3ActionPerformed
 
     private void btnVerRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRegistrosActionPerformed
        PanelEnlistarRegistro panelEnlistarRegistro = new PanelEnlistarRegistro();
        MenuPrincipal.cargarPanel(panelEnlistarRegistro);
     }//GEN-LAST:event_btnVerRegistrosActionPerformed
 
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+       PanelPedidos panel = new PanelPedidos();
+       MenuPrincipal.cargarPanel(panel);
+    }//GEN-LAST:event_btnPedidosActionPerformed
+
+    private void btnPedidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidos1ActionPerformed
+       PanelCompra panel = new PanelCompra();
+       MenuPrincipal.cargarPanel(panel);
+    }//GEN-LAST:event_btnPedidos1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngresarCliente;
-    private javax.swing.JButton btnIngresarEmpleado;
-    private javax.swing.JButton btnIngresarProducto;
-    private javax.swing.JButton btnIngresarProducto3;
     private javax.swing.JButton btnIngresarTienda;
+    private javax.swing.JButton btnPedidos;
+    private javax.swing.JButton btnPedidos1;
     private javax.swing.JButton btnVerRegistros;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

@@ -8,61 +8,64 @@ package entidades;
  * @author grifiun
  */
 public class Compra {
-    private int codigo_compra;
-    private int efectivo;
-    private int credito_usado;
-    private int precio_total;
-    private int codigo_tienda;
+    private String codigo_compra;
+    private String efectivo;
+    private String credito_usado;
+    private String precio_total;
+    private String codigo_tienda;
     private String nit_cliente;
-    private int codigo_pedido;
-
-    public Compra(int codigo_compra, int efectivo, int credito_usado, int precio_total, int codigo_tienda, String nit_cliente, int codigo_pedido) {
+    private String codigo_pedido;
+    
+    public Compra(String codigo_compra, String credito_usado, String precio_total, String codigo_tienda, String nit_cliente, String codigo_pedido) {
         this.codigo_compra = codigo_compra;
-        this.efectivo = efectivo;
+        System.out.println("Compra: "+this.codigo_compra);
+        this.efectivo = String.valueOf(Double.parseDouble(precio_total) - Double.parseDouble(credito_usado));
+        System.out.println("Efectivo: "+this.efectivo);
         this.credito_usado = credito_usado;
+        System.out.println("Credito usado: "+this.credito_usado);
         this.precio_total = precio_total;
         this.codigo_tienda = codigo_tienda;
         this.nit_cliente = nit_cliente;
         this.codigo_pedido = codigo_pedido;
     }
 
-    public int getCodigo_compra() {
+    public String getCodigo_compra() {
         return codigo_compra;
     }
 
-    public void setCodigo_compra(int codigo_compra) {
+    public void setCodigo_compra(String codigo_compra) {
         this.codigo_compra = codigo_compra;
     }
 
-    public int getEfectivo() {
+    public String getEfectivo() {
         return efectivo;
     }
 
-    public void setEfectivo(int efectivo) {
+    public void setEfectivo(String efectivo) {
         this.efectivo = efectivo;
     }
 
-    public int getCredito_usado() {
+    public String getCredito_usado() {
         return credito_usado;
     }
 
-    public void setCredito_usado(int credito_usado) {
+    public void setCredito_usado(String credito_usado) {
         this.credito_usado = credito_usado;
     }
 
-    public int getPrecio_total() {
+    public String getPrecio_total() {
         return precio_total;
     }
 
-    public void setPrecio_total(int precio_total) {
+    public void setPrecio_total(String precio_total) {
         this.precio_total = precio_total;
     }
 
-    public int getCodigo_tienda() {
+    public String getCodigo_tienda() {
         return codigo_tienda;
     }
 
-    public void setCodigo_tienda(int codigo_tienda) {
+    public void setCodigo_tienda(String codigo_tienda) {
         this.codigo_tienda = codigo_tienda;
     }
 
@@ -74,11 +77,11 @@ public class Compra {
         this.nit_cliente = nit_cliente;
     }
 
-    public int getCodigo_pedido() {
+    public String getCodigo_pedido() {
         return codigo_pedido;
     }
 
-    public void setCodigo_pedido(int codigo_pedido) {
+    public void setCodigo_pedido(String codigo_pedido) {
         this.codigo_pedido = codigo_pedido;
     }
     

@@ -63,17 +63,15 @@ CREATE TABLE Tiempo_envio(
 
 CREATE TABLE Pedido(
   codigo_pedido INT NOT NULL,
-  estado VARCHAR(9) NOT NULL DEFAULT 'ACTIVO',
+  estado VARCHAR(11) NOT NULL DEFAULT 'EN TRANSITO',
   fecha DATE NOT NULL,
   anticipo DECIMAL(7,2) NOT NULL,
   codigo_tienda_1 VARCHAR(8) NOT NULL,
   codigo_tienda_2 VARCHAR(8) NULL,
-  codigo_tienda_destino VARCHAR(8) NOT NULL,
   nit_cliente VARCHAR(13) NOT NULL,
   credito_usado_anticipo DECIMAL(7,2) DEFAULT '0',
   
   CONSTRAINT PK_Pedido PRIMARY KEY(codigo_pedido),
-  CONSTRAINT FK_Pedido_Tiempo_envio FOREIGN KEY(codigo_tienda_1, codigo_tienda_2) REFERENCES Tiempo_envio(tienda_1, tienda_2),
   CONSTRAINT FK_Pedido_Cliente FOREIGN KEY(nit_cliente) REFERENCES Cliente(nit)
 );
 

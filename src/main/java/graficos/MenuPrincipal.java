@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
@@ -31,7 +32,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         initContenedorPaneles();
-        
+        setVisibilidadFecha2(false);
         try {   
             conection_data_base.EnlaceJDBC.crearEnlaceJDBC();//Creamos la conexion que se usara a lo largo de la ejecucion del programa
         } catch (ClassNotFoundException ex) {
@@ -63,6 +64,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         btExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        txtCambiarFecha = new javax.swing.JButton();
+        lblFecha2 = new javax.swing.JLabel();
+        txtCambiarFecha2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -77,29 +82,63 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel1.setText("Fecha:");
 
+        lblFecha.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        lblFecha.setText("2020-08-22");
+
+        txtCambiarFecha.setText("cambiar");
+        txtCambiarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCambiarFechaActionPerformed(evt);
+            }
+        });
+
+        lblFecha2.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        lblFecha2.setText("2020-08-30");
+
+        txtCambiarFecha2.setText("cambiar");
+        txtCambiarFecha2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCambiarFecha2ActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jLabel2.setText("2020-08-22");
+        jLabel2.setText("Fecha 2:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFecha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCambiarFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 829, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFecha2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCambiarFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE)
                 .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(0, 579, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(lblFecha2)
+                        .addComponent(txtCambiarFecha2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(lblFecha)
+                        .addComponent(txtCambiarFecha)))
+                .addGap(0, 559, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +154,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         //cerramos ventana y finalizamos el proyecto
         System.exit(0);
     }//GEN-LAST:event_btExitActionPerformed
+
+    private void txtCambiarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarFechaActionPerformed
+        // TODO add your handling code here:
+        String nuevaFecha = JOptionPane.showInputDialog(this, "Ingresa la nueva fecha:\nFormato AAAA/MM/DD");
+        setFecha(nuevaFecha);
+    }//GEN-LAST:event_txtCambiarFechaActionPerformed
+
+    private void txtCambiarFecha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarFecha2ActionPerformed
+        String nuevaFecha = JOptionPane.showInputDialog(this, "Ingresa la nueva fecha:\nFormato AAAA/MM/DD");
+        setFecha2(nuevaFecha);
+    }//GEN-LAST:event_txtCambiarFecha2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +205,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     private void initContenedorPaneles() {        
         contenedorPanel = new JScrollPane();   
-        contenedorPanel.setBounds(2, 25, 1030, 575);//Agregamos posicion y tamano
+        contenedorPanel.setBounds(2, 32, 1030, 575);//Agregamos posicion y tamano
         contenedorPanel.setBorder(new LineBorder(getBackground()));
         add(contenedorPanel);
     }
@@ -183,10 +233,36 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }        
         return false;
     }
-
+    /**
+     * Modificar fecha
+     * @param fecha 
+     */
+    public static void setFecha(String fecha){
+        lblFecha.setText(fecha);
+    }
+    public static String getFecha(){
+        return String.valueOf(lblFecha.getText());
+    }
+    
+    public static void setFecha2(String fecha){
+        lblFecha2.setText(fecha);
+    }
+    public static String getFecha2(){
+        return String.valueOf(lblFecha2.getText());
+    }
+    public static void setVisibilidadFecha2(boolean visibilidad){
+        jLabel2.setVisible(visibilidad);
+        lblFecha2.setVisible(visibilidad);
+        txtCambiarFecha2.setVisible(visibilidad);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btExit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private static javax.swing.JLabel jLabel2;
+    public static javax.swing.JLabel lblFecha;
+    public static javax.swing.JLabel lblFecha2;
+    private javax.swing.JButton txtCambiarFecha;
+    private static javax.swing.JButton txtCambiarFecha2;
     // End of variables declaration//GEN-END:variables
 }

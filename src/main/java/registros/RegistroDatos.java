@@ -121,11 +121,38 @@ public class RegistroDatos extends conection_data_base.Consulta{
      * @param nombreTabla
      * @return 
      */
-    public String[][] obtenerDatos(String nombreTabla){
-        String orden = "SELECT * FROM "+nombreTabla;        
+    public String[][] obtenerDatos(String orden){       
         ArrayList<String[]> resultado = new ArrayList();
         //creamos el ResultSet dentro del try catch para que se cierre automaticamente
         try (ResultSet rsPrueba = consultaOrden(orden);){
+            ResultSetMetaData rsmd = rsPrueba.getMetaData();//Obtenemos la metadata para las columnas    
+            
+            while(rsPrueba.next()){//si existe el siguiente registro obtenemos la informacion   
+                //Creamos el Stirng[] auxiliar
+                String[] aux = new String[rsmd.getColumnCount()];
+                for(int i = 1; i <=  rsmd.getColumnCount(); i++){
+                    aux[i - 1] = rsPrueba.getString(i);
+                }
+                resultado.add(aux);
+            } 
+
+            return resultado.toArray(new String[0][0]);
+        } catch (SQLException ex) {
+            System.out.println("ERROR AL BUSCAR EL REGISTRO");
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Obtener datos de las tabla ingresada
+     * @param nombreTabla
+     * @return 
+     */
+    public String[][] obtenerDatos(String orden, ArrayList<String> datos){       
+        ArrayList<String[]> resultado = new ArrayList();
+        //creamos el ResultSet dentro del try catch para que se cierre automaticamente
+        try (ResultSet rsPrueba = consultaOrden(datos, orden);){
             ResultSetMetaData rsmd = rsPrueba.getMetaData();//Obtenemos la metadata para las columnas    
             
             while(rsPrueba.next()){//si existe el siguiente registro obtenemos la informacion   
