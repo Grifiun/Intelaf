@@ -197,8 +197,8 @@ public class PanelCreacionTienda extends javax.swing.JPanel {
      * @param evt 
      */
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
-       PanelEmpleado panelEmpleado = new PanelEmpleado();
-       MenuPrincipal.cargarPanel(panelEmpleado);
+       PanelIngresarRegistros panelEmpleado = new PanelIngresarRegistros();
+        MenuPrincipal.cargarPanel(panelEmpleado);
     }//GEN-LAST:event_txtCancelarActionPerformed
 
     /**

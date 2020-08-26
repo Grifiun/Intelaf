@@ -225,7 +225,7 @@ public class PanelCreacionEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegistrarTiendaActionPerformed
 
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
-        PanelEmpleado panelEmpleado = new PanelEmpleado();
+        PanelIngresarRegistros panelEmpleado = new PanelIngresarRegistros();
         MenuPrincipal.cargarPanel(panelEmpleado);
     }//GEN-LAST:event_txtCancelarActionPerformed
 

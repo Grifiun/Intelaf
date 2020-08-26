@@ -243,7 +243,7 @@ public class PanelIngresarProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
-        PanelEmpleado panelEmpleado = new PanelEmpleado();
+        PanelIngresarRegistros panelEmpleado = new PanelIngresarRegistros();
         MenuPrincipal.cargarPanel(panelEmpleado);
     }//GEN-LAST:event_txtCancelarActionPerformed
     /**

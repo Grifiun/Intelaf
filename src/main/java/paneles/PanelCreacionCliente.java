@@ -176,7 +176,7 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTiendaActionPerformed
-
+                
         Cliente entidadAux = new Cliente(txtNITCliente.getText(), txtNombreCliente.getText(), txtTelefonoCliente.getText(), txtCorreoCliente.getText(), 
                 txtDireccionCliente.getText(), txtDPICliente.getText(), txtCreditoCliente.getText());
         //Revisamos los campos obligatorios, si están llenos o vacíos
@@ -189,7 +189,7 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
             auxiliarSubDatos.agregarSubStringYDato(entidadAux.getNombre_cliente(), ", nombre_cliente");
             auxiliarSubDatos.agregarSubStringYDato(entidadAux.getTelefono_cliente(), ", telefono_cliente");
             auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCorreo_cliente(), ", correo_cliente");
-            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getDirreccion_cliente(), ", direccion_cliente");
+            auxiliarSubDatos.agregarSubStringYDato(entidadAux.getDirreccion_cliente(), ", dirreccion_cliente");
             auxiliarSubDatos.agregarSubStringYDato(entidadAux.getDpi(), ", dpi");
             auxiliarSubDatos.agregarSubStringYDato(entidadAux.getCredito(), ", credito");
 
@@ -210,7 +210,7 @@ public class PanelCreacionCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCorreoClienteActionPerformed
 
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
-        PanelEmpleado panelEmpleado = new PanelEmpleado();
+        PanelIngresarRegistros panelEmpleado = new PanelIngresarRegistros();
         MenuPrincipal.cargarPanel(panelEmpleado);
     }//GEN-LAST:event_txtCancelarActionPerformed
 

@@ -244,7 +244,13 @@ public class PanelListaPedidos extends javax.swing.JPanel {
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         //instanciamos el exportador de datos
-        ExportarTabla exportar = new ExportarTabla(tablaAux, nombreColumnas, String.valueOf(boxEstado.getSelectedItem()));
+        String encabezado = "REPORTE - "+String.valueOf(boxEstado.getSelectedItem())+" - ";
+        if(boxEstado.getSelectedIndex() == 5){
+            encabezado = encabezado + " Del Cliente con NIT "+String.valueOf(boxCliente.getSelectedItem());
+        }else{
+            encabezado = encabezado + " De la tienda con codigo "+String.valueOf(txtTienda.getSelectedItem());
+        }
+        ExportarTabla exportar = new ExportarTabla(tablaAux, nombreColumnas, String.valueOf(boxEstado.getSelectedItem()), encabezado);
         //exportamos
         exportar.exportar();
     }//GEN-LAST:event_btnExportarActionPerformed
