@@ -8,6 +8,7 @@ package registros;
 import graficos.MenuPrincipal;
 import java.sql.SQLException;
 import paneles.PanelEmpleado;
+import paneles.PanelUsuario;
 
 /**
  * Clase encargada del login 
@@ -35,6 +36,9 @@ public class RegistroLogin extends RegistroDatos{
             rolUser = "Empleado";
         }else if(regCliente.verificarExistenciaCliente(codigoUsuario)){//Si existe en la tabla de Cliente retornamos cliente
             rolUser = "Cliente";
+            PanelUsuario panelCliente = new PanelUsuario();
+            panelCliente.setNIT(codigoUsuario);
+            MenuPrincipal.cargarPanel(panelCliente);//mostramaos en el contenedor de paneles
         }
         
         return rolUser;

@@ -34,10 +34,11 @@ import exportado_de_tabla.ExportarTabla;
  */
 public class PanelListaPedidos extends javax.swing.JPanel {
     private final String[] nombreColumnas = "Cod. Pedido,Estado,Fecha de pedido,Anticipo,Cod. Tienda 1,Cod. Tienda2,NIT Cliente,Credito Usado".split(",");
-    private boolean inicio = true;
+    private boolean inicio = true, cliente = true;
     private JPanel panelParaTabla;    
     private JTable tablaAux;  
     private TableRowSorter<TableModel> buscador;
+    
     /**
      * Creates new form PanelListaPedidos
      */
@@ -50,7 +51,29 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         prepararTabla();
         inicio = false;
     }
-
+    /**
+     * Creates new form PanelListaPedidos
+     */
+    public PanelListaPedidos(String NIT) {
+        initComponents();        
+        cliente = false;
+        cargarTiendas();        
+        cargarClientes();
+        prepararPanelTabla();                
+        prepararTabla();
+        inicio = false;
+        boxCliente.setSelectedItem(NIT);
+        boxEstado.setSelectedIndex(5);
+        boxEstado.setVisible(false);
+        boxCliente.setVisible(false);
+        jLabel1.setText("RASTREO PEDIDO");
+        jLabel10.setVisible(false);
+        jLabel3.setVisible(false);
+        btnExportar.setVisible(false);
+        btnEditar.setVisible(false);
+        txtTienda.setVisible(false);
+        jLabel9.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,7 +107,7 @@ public class PanelListaPedidos extends javax.swing.JPanel {
             }
         });
 
-        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4.1 Todos los pedidos por llegar", "4.2 Pedidos por verificar ingreso", "4.3 Pedidos  con retraso", "4.4 Pedidos salientes en tránsito", "Pedidos recibidos sin recoger", "4.6 Pedidos en curso de un cliente" }));
+        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4.1 Todos los pedidos por llegar", "4.2 Pedidos por verificar ingreso", "4.3 Pedidos  con retraso", "4.4 Pedidos salientes en tránsito", "Pedidos por recoger", "4.6 Pedidos en curso de un cliente" }));
         boxEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxEstadoActionPerformed(evt);
@@ -139,8 +162,8 @@ public class PanelListaPedidos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(boxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
@@ -188,14 +211,12 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         int x = tablaAux.getSelectedRow(); //Obtenemos la posicion de la seleccion de las filas
         
         if(x != -1 ){//Si hay filas seleccionadas
-            
             int reply = JOptionPane.showConfirmDialog(null, "Desea recibir este paquete?", "Recibir paquete", JOptionPane.YES_NO_OPTION);//mostramos menu de confirmacion
             if (reply == JOptionPane.YES_OPTION) {//si acepta modifcamos el dato
                 editarDatos(x);
             } else {
                 JOptionPane.showMessageDialog(null, "ok");//si no acepta no pasa nada
-            }
-           
+            }    
         }else{
             JOptionPane.showMessageDialog(this, "Selecciona una fila primero");
         }
@@ -204,7 +225,12 @@ public class PanelListaPedidos extends javax.swing.JPanel {
     public void editarDatos(int x){
         RegistroDatos rd = new RegistroDatos();
         ArrayList<String> datos = new ArrayList();
-        datos.add("RECIBIDO");//agregamos el nuevo estado
+        if(boxEstado.getSelectedIndex() == 1){
+            datos.add("RECIBIDO");//agregamos el nuevo estado
+        }else if(boxEstado.getSelectedIndex() == 2){
+            datos.add("RETRASADO");//agregamos el nuevo estado
+        }
+        
         datos.add(String.valueOf(tablaAux.getValueAt(x, 0)));//Agregamos el valor del codigo del pedido
         rd.actualizarDatos(datos, "Pedido", "estado", "codigo_pedido");    
         actualizarInfoTabla();
@@ -214,7 +240,7 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         if(inicio == false){
              actualizarInfoTabla();
         }
-        if(boxEstado.getSelectedIndex()== 1){
+        if(boxEstado.getSelectedIndex()== 1 || boxEstado.getSelectedIndex()== 2){
             btnEditar.setEnabled(true);
         }else{
             btnEditar.setEnabled(false);
@@ -230,8 +256,15 @@ public class PanelListaPedidos extends javax.swing.JPanel {
     }
     
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        PanelPedidos panel = new PanelPedidos();
-        MenuPrincipal.cargarPanel(panel);
+        
+        if(cliente){
+             PanelPedidos panel = new PanelPedidos();
+             MenuPrincipal.cargarPanel(panel);
+        }else{
+            PanelUsuario panel = new PanelUsuario();
+            MenuPrincipal.cargarPanel(panel);
+        }
+       
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTiendaActionPerformed

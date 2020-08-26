@@ -26,8 +26,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="boxCliente" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEditar" min="-2" pref="87" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnEditar" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnExportar" min="-2" pref="111" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -106,7 +106,7 @@
             <StringItem index="1" value="4.2 Pedidos por verificar ingreso"/>
             <StringItem index="2" value="4.3 Pedidos  con retraso"/>
             <StringItem index="3" value="4.4 Pedidos salientes en tr&#xe1;nsito"/>
-            <StringItem index="4" value="Pedidos recibidos sin recoger"/>
+            <StringItem index="4" value="Pedidos por recoger"/>
             <StringItem index="5" value="4.6 Pedidos en curso de un cliente"/>
           </StringArray>
         </Property>

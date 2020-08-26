@@ -64,4 +64,30 @@ public class ComboBoxCargarDato{
         }
         return null;
     }
+    /**
+     * Similar al anterior, en esta funcion lo unico que cambia es que 
+     * esta carga los datos del campo dado en la tabla dada, sin embargo solo
+     * donde el campo2 tenga un valor equivalente al valor dado
+     * @param nombreCampo
+     * @param nombreTabla
+     * @param nombreCampo2
+     * @param valorCampo2
+     * @return 
+     */
+    public JComboBox cargar(String nombreCampo, String nombreTabla, String nombreCampo2, String valorCampo2, String nombreCampo3, String valorCampo3) {
+        JComboBox cbox = new JComboBox();
+        ArrayList<String> datos = new ArrayList();
+        datos.add(valorCampo2);//agregamos el valor del campo dado
+        datos.add(valorCampo3);//agregamos el valor del campo dado
+        try(ResultSet rs = Consulta.consultaOrden(datos, "SELECT "+nombreCampo+" FROM "+nombreTabla+" WHERE ("+nombreCampo2+" = ? OR "+nombreCampo3+" = ?)")){
+            //Agregamos los codigos del atributo al comboBox
+            while(rs.next()){
+                cbox.addItem(rs.getString(nombreCampo));
+            }
+            return cbox;
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelCreacionEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

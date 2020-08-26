@@ -94,7 +94,7 @@ public class PanelLogin extends javax.swing.JPanel {
             rolUsuario = login.tipoUsuario(codUsuario);//el rol del usuario es el devuelto
             
             if(rolUsuario.equals("Cliente")){
-                System.out.println("ES JUN CLIENTE");
+                System.out.println("ES UN CLIENTE");
             }else if(rolUsuario.equals("Empleado")){
                 System.out.println("ES UN EMPLEADO");
             }else{
