@@ -33,7 +33,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
         "Cod. Producto,Cantidad,Precio,Nombre,Fabricante,Descripcion,Garantia,Se encuentra en".split(","),
         "Cod. Tienda 1,Cod. Tienda 2,Tiempo entre tiendas".split(","),
         "Cod. Compra,Efectivo usado,Credito usado,Precio Total,Cod. Tienda de compra,NIT Cliente,Cod. Pedido".split(","),
-        "Cod. Pedido,Estado,Fecha de pedido,Anticipo,Cod. Tienda 1,Cod. Tienda2,Cod. Tienda Destino,NIT Cliente,Credito Usado".split(",")};
+        "Cod. Pedido,Estado,Fecha de pedido,Anticipo,Cod. Tienda 1,Cod. Tienda2,NIT Cliente,Credito Usado".split(",")};
     
     private final String[][] nombreAtributosTablas = { "codigo_tienda,nombre_tienda,direccion_tienda,telefono_1,telefono_2,horario,correo".split(","),
         "codigo_empleado,nombre_empleado,dpi,correo_empleado,direccion_empleado,nit_empleado,telefono_empleado,codigo_tienda".split(","),
@@ -137,7 +137,6 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
         btnRegresar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
-        comboBoxCampoAEditar = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("LISTADOS");
@@ -165,8 +164,6 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
 
         jLabel2.setText("Buscar:");
 
-        comboBoxCampoAEditar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "tiempo" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,9 +175,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
                 .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboBoxCampoAEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(143, 143, 143)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboBoxTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,8 +195,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
                     .addComponent(comboBoxTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegresar)
                     .addComponent(jLabel2)
-                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBoxCampoAEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -248,7 +242,7 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Esta tabla no se puede editar");
         else{
             if(editable[comboBoxTabla.getSelectedIndex()][y] == 1){
-                editarDatos(x, y);
+                editarDatos(x, y);               
             }else{
                 JOptionPane.showMessageDialog(this, "Este atributo no se puede editar");
             }
@@ -267,14 +261,14 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
         ed.setPk1(nombreAtributosTablas[comboBoxTabla.getSelectedIndex()][0]);//El nombre del atributo del primer PK
         ed.setPk2(nombreAtributosTablas[comboBoxTabla.getSelectedIndex()][1]);//El nombre del segundo atributo
         
-        ed.editarDatos();        
+        ed.editarDatos(); 
+        
         actualizarInfoTabla();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> comboBoxCampoAEditar;
     private javax.swing.JComboBox<String> comboBoxTabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

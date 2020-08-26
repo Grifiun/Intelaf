@@ -25,18 +25,8 @@ public class RegistroPedidoYSubPedido {
         datosPedido.remove(5);//removemos la cantidad del articulo
         subDatos.add(datosPedido.get(5));//Agregamos el subtotal o total por producto
         datosPedido.remove(5);//removemos el subtotal   
-        String aux = datosPedido.get(2);
-        datosPedido.add(aux);//agregamos el codigo de la tienda de destino
-            
+        String aux = datosPedido.get(2);            
         
-        if(verificarDireccionEnvio(datosPedido.get(1), datosPedido.get(2)) == false){//Si no existe el tiempod envio de la tienda 1 a la 2 se invierte su posicion
-            String aux2, aux1;
-            aux2 = datosPedido.get(1);
-            aux1 = datosPedido.get(2);
-            
-            datosPedido.set(1, aux1);
-            datosPedido.set(2, aux2);            
-        }
         this.datosPedido = datosPedido;        
         
     }
@@ -51,7 +41,7 @@ public class RegistroPedidoYSubPedido {
         try {
             RegistroTiempo regT = new RegistroTiempo();
             tiempo = regT.revisarTiempo(tienda1, tienda2);//revisamos la existencia del tiempo entre las tiendas, de existir            
-            if(tiempo > 0){
+            if(tiempo >= 0){
                 return true;
             }
         }catch (SQLException ex) {

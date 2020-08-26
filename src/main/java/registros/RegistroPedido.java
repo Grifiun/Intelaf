@@ -21,7 +21,7 @@ public class RegistroPedido extends RegistroDatos{
      * Se registran los pedidos
      */
     public RegistroPedido() {
-        setSubOrden("Pedido (codigo_pedido, codigo_tienda_1, codigo_tienda_2, fecha, nit_cliente, anticipo, codigo_tienda_destino)");        
+        setSubOrden("Pedido (codigo_pedido, codigo_tienda_1, codigo_tienda_2, fecha, nit_cliente, anticipo)");        
     }
     
     /**
