@@ -44,7 +44,8 @@ public class PanelListaPedidos extends javax.swing.JPanel {
     public PanelListaPedidos() {
         initComponents();        
         
-        cargarTiendas();
+        cargarTiendas();        
+        cargarClientes();
         prepararPanelTabla();                
         prepararTabla();
         inicio = false;
@@ -69,11 +70,13 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         txtTienda = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         btnExportar = new javax.swing.JButton();
+        boxCliente = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("LISTA DE PEDIDOS");
 
-        btnEditar.setText("Recibir producto");
+        btnEditar.setText("Recibir p.");
         btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +84,7 @@ public class PanelListaPedidos extends javax.swing.JPanel {
             }
         });
 
-        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los pedidos por llegar", "Pedidos por verificar ingreso", "Pedidos  con retraso", "Pedidos salientes en tránsito", "Pedidos recibidos sin recoger" }));
+        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4.1 Todos los pedidos por llegar", "4.2 Pedidos por verificar ingreso", "4.3 Pedidos  con retraso", "4.4 Pedidos salientes en tránsito", "Pedidos recibidos sin recoger", "4.6 Pedidos en curso de un cliente" }));
         boxEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxEstadoActionPerformed(evt);
@@ -107,12 +110,20 @@ public class PanelListaPedidos extends javax.swing.JPanel {
 
         jLabel9.setText("Tienda:");
 
-        btnExportar.setText("Exportar HTML");
+        btnExportar.setText("Exp. HTML");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportarActionPerformed(evt);
             }
         });
+
+        boxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Nit Cliente:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -120,25 +131,29 @@ public class PanelListaPedidos extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(boxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(boxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtTienda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(26, 26, 26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel2)
                         .addGap(2, 2, 2)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,6 +176,8 @@ public class PanelListaPedidos extends javax.swing.JPanel {
                     .addComponent(btnRegresar)
                     .addComponent(boxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
+                    .addComponent(boxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
                     .addComponent(btnExportar))
                 .addContainerGap())
         );
@@ -231,6 +248,12 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         //exportamos
         exportar.exportar();
     }//GEN-LAST:event_btnExportarActionPerformed
+
+    private void boxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxClienteActionPerformed
+        if(inicio == false){
+            actualizarInfoTabla();
+        }
+    }//GEN-LAST:event_boxClienteActionPerformed
     /**
      * Funcion que actualizara la tabla con la informacion
      * de la tabla elegida
@@ -239,17 +262,27 @@ public class PanelListaPedidos extends javax.swing.JPanel {
     public void prepararTabla(){ 
         RegistroDatos regD = new RegistroDatos();
         ArrayList<String> datos = new ArrayList();
-        datos.add(String.valueOf(txtTienda.getSelectedItem()));//agregamos el codigo de la tienda
-        if(boxEstado.getSelectedIndex() != 4){
+        if(boxEstado.getSelectedIndex() >= 0 &&  boxEstado.getSelectedIndex() <= 3){            
+            datos.add(String.valueOf(txtTienda.getSelectedItem()));//agregamos el codigo de la tienda            
             datos.add(String.valueOf(MenuPrincipal.getFecha()));//agregamos la fecha
+            System.out.println(datos.size());
+        }else if(boxEstado.getSelectedIndex() == 4){
+            datos.add(String.valueOf(txtTienda.getSelectedItem()));//agregamos el codigo de la tienda   
+            System.out.println(datos.size());
+        }else if(boxEstado.getSelectedIndex() == 5){            
+            datos.add(String.valueOf(boxCliente.getSelectedItem()));//agregamos el nit del cliente
+            System.out.println(datos.size());
         }
-        String[] condicion = new String[5];
-        condicion[0] = "(estado = 'EN TRANSITO') AND (codigo_tienda_2 = ?) AND (DATEDIFF(?, fecha) < (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
-        condicion[1] = "(estado = 'EN TRANSITO') AND (codigo_tienda_2 = ?) AND (DATEDIFF(?, fecha) = (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
-        condicion[2] = "(estado = 'EN TRANSITO') AND (codigo_tienda_2 = ?) AND (DATEDIFF(?, fecha) > (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
-        condicion[3] = "(estado = 'EN TRANSITO' OR estado = 'ATRASADO') AND (codigo_tienda_1 = ?) AND (DATEDIFF(?, fecha) < (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
-        condicion[4] = "(estado = 'RECIBIDO') AND (codigo_tienda_2 = ?)";
-        TableModel model = new DefaultTableModel(regD.obtenerDatos("Pedido", condicion[boxEstado.getSelectedIndex()], datos), nombreColumnas)//creamos un modelo para agregar especificaciones
+        
+        
+        String[] condicion = new String[6];
+        condicion[0] = "SELECT * FROM Pedido WHERE (estado = 'EN TRANSITO') AND (codigo_tienda_2 = ?) AND (DATEDIFF(?, fecha) < (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
+        condicion[1] = "SELECT * FROM Pedido WHERE (estado = 'EN TRANSITO') AND (codigo_tienda_2 = ?) AND (DATEDIFF(?, fecha) = (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
+        condicion[2] = "SELECT * FROM Pedido WHERE (estado = 'EN TRANSITO') AND (codigo_tienda_2 = ?) AND (DATEDIFF(?, fecha) > (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
+        condicion[3] = "SELECT * FROM Pedido WHERE (estado = 'EN TRANSITO' OR estado = 'ATRASADO') AND (codigo_tienda_1 = ?) AND (DATEDIFF(?, fecha) < (SELECT tiempo FROM Tiempo_envio t WHERE (t.tienda_1 = codigo_tienda_1 AND tienda_2 = codigo_tienda_2) OR (t.tienda_2 = codigo_tienda_1 AND tienda_1 = codigo_tienda_2)))";
+        condicion[4] = "SELECT * FROM Pedido WHERE (estado = 'RECIBIDO') AND (codigo_tienda_2 = ?)";
+        condicion[5] = "SELECT * FROM Pedido WHERE (estado = 'EN TRANSITO' OR estado = 'RETRASADO' OR estado = 'RECIBIDO') AND (nit_cliente = ?)";
+        TableModel model = new DefaultTableModel(regD.obtenerDatos(condicion[boxEstado.getSelectedIndex()], datos), nombreColumnas)//creamos un modelo para agregar especificaciones
             {
               public boolean isCellEditable(int row, int column)
               {
@@ -323,6 +356,16 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         }
 
     }
+    private void cargarClientes(){
+        ComboBoxCargarDato cargarDato = new ComboBoxCargarDato();
+        JComboBox cboxAux = new JComboBox();
+        cboxAux = cargarDato.cargar("nit", "Cliente");//mandamos le nombre del atributo y nombre de la tabla
+        //Pasamos el contenido de un cbo auxiliar al que nos interesa
+        for (int i = 0; i < cboxAux.getItemCount(); i++) 
+        {
+            boxCliente.addItem(String.valueOf(cboxAux.getItemAt(i)));
+        }
+    }
     
     public int obtenerTiempoEnvio(String tienda1, String tienda2){   
         int tiempo;
@@ -338,11 +381,13 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         return -1;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxCliente;
     private javax.swing.JComboBox<String> boxEstado;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;

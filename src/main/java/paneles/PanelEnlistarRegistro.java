@@ -63,7 +63,8 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
      */
     public void prepararTabla(String nombreTabla, String[] tituloColumnas){ 
         RegistroDatos regD = new RegistroDatos();
-        TableModel model = new DefaultTableModel(regD.obtenerDatos(nombreTabla), tituloColumnas)//creamos un modelo para agregar especificaciones
+        
+        TableModel model = new DefaultTableModel(regD.obtenerDatos("SELECT * FROM "+nombreTabla), tituloColumnas)//creamos un modelo para agregar especificaciones
             {
               public boolean isCellEditable(int row, int column)
               {

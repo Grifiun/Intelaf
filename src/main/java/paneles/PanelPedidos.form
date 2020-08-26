@@ -22,7 +22,6 @@
                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtCancelar" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnEntregarPedido" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnRecibirProducto" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnIngresarProducto3" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnListadoPedidos" alignment="0" pref="216" max="32767" attributes="0"/>
                   </Group>
@@ -45,25 +44,15 @@
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="btnListadoPedidos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnRecibirProducto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="btnEntregarPedido" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="txtCancelar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="174" max="32767" attributes="0"/>
+              <EmptySpace pref="222" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnRecibirProducto">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Recibir Pedido"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecibirProductoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnEntregarPedido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Entregar Pedido"/>

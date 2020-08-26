@@ -220,7 +220,7 @@ public class PanelRegistroCompra extends javax.swing.JPanel {
      */
     private void registrarPedido(){
         Pedido entidadAux = new Pedido(codigoPedidoGenerado, lblPrecio.getText(), "POR COMPRA", MenuPrincipal.getFecha(),
-                "0.00", String.valueOf(boxCodTienda.getSelectedItem()),  "-", 
+                "0.00",  "-", String.valueOf(boxCodTienda.getSelectedItem()),  
                 String.valueOf(txtNIT.getSelectedItem()), "0.00");
         //Revisamos los campos obligatorios, si están llenos o vacíos
         if(entidadAux.getCodigo_pedido().isEmpty() || entidadAux.getFecha().isEmpty() || entidadAux.getAnticipo().isEmpty() || entidadAux.getCodigo_tienda_origen().isEmpty()

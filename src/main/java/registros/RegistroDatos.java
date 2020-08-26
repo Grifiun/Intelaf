@@ -121,8 +121,7 @@ public class RegistroDatos extends conection_data_base.Consulta{
      * @param nombreTabla
      * @return 
      */
-    public String[][] obtenerDatos(String nombreTabla){
-        String orden = "SELECT * FROM "+nombreTabla;        
+    public String[][] obtenerDatos(String orden){       
         ArrayList<String[]> resultado = new ArrayList();
         //creamos el ResultSet dentro del try catch para que se cierre automaticamente
         try (ResultSet rsPrueba = consultaOrden(orden);){
@@ -150,8 +149,7 @@ public class RegistroDatos extends conection_data_base.Consulta{
      * @param nombreTabla
      * @return 
      */
-    public String[][] obtenerDatos(String nombreTabla, String condicion, ArrayList<String> datos){
-        String orden = "SELECT * FROM "+nombreTabla+" WHERE "+condicion;        
+    public String[][] obtenerDatos(String orden, ArrayList<String> datos){       
         ArrayList<String[]> resultado = new ArrayList();
         //creamos el ResultSet dentro del try catch para que se cierre automaticamente
         try (ResultSet rsPrueba = consultaOrden(datos, orden);){
