@@ -52,9 +52,19 @@ public class PanelEnlistarRegistro extends javax.swing.JPanel {
     public PanelEnlistarRegistro() {
         initComponents();
         prepararPanelTabla();
-                
+              
         prepararTabla(nombreTablas[0], nombreColumnas[0]);
     }
+    
+    public PanelEnlistarRegistro(String tabla) {
+        initComponents();
+        prepararPanelTabla();        
+        prepararTabla(nombreTablas[3], nombreColumnas[4]);
+        comboBoxTabla.setVisible(false);
+        btnEditar.setVisible(false);
+        jLabel1.setText("Productos");
+    }
+    
 
     /**
      * Funcion que actualizara la tabla con la informacion

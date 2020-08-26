@@ -31,16 +31,16 @@ public class PanelPedidos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnEntregarPedido = new javax.swing.JButton();
+        txtFacturarPedido = new javax.swing.JButton();
         txtCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnIngresarProducto3 = new javax.swing.JButton();
         btnListadoPedidos = new javax.swing.JButton();
 
-        btnEntregarPedido.setText("Entregar Pedido");
-        btnEntregarPedido.addActionListener(new java.awt.event.ActionListener() {
+        txtFacturarPedido.setText("Facturar pedido");
+        txtFacturarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntregarPedidoActionPerformed(evt);
+                txtFacturarPedidoActionPerformed(evt);
             }
         });
 
@@ -77,7 +77,7 @@ public class PanelPedidos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEntregarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFacturarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnIngresarProducto3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnListadoPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -95,17 +95,17 @@ public class PanelPedidos extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(btnListadoPedidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEntregarPedido)
+                .addComponent(txtFacturarPedido)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCancelar)
                 .addContainerGap(222, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregarPedidoActionPerformed
-        PanelCreacionEmpleado panelCreacionEmp = new PanelCreacionEmpleado();
+    private void txtFacturarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFacturarPedidoActionPerformed
+        PanelFacturarPedido panelCreacionEmp = new PanelFacturarPedido();
         MenuPrincipal.cargarPanel(panelCreacionEmp);
-    }//GEN-LAST:event_btnEntregarPedidoActionPerformed
+    }//GEN-LAST:event_txtFacturarPedidoActionPerformed
 
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
         PanelEmpleado panelEmpleado = new PanelEmpleado();
@@ -123,10 +123,10 @@ public class PanelPedidos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnListadoPedidosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEntregarPedido;
     private javax.swing.JButton btnIngresarProducto3;
     private javax.swing.JButton btnListadoPedidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton txtCancelar;
+    private javax.swing.JButton txtFacturarPedido;
     // End of variables declaration//GEN-END:variables
 }

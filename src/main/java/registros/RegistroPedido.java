@@ -5,6 +5,7 @@
  */
 package registros;
 
+import entidades.Pedido;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,6 +60,7 @@ public class RegistroPedido extends RegistroDatos{
         }
         return aux;//retornamos el booleano
     }
+    
     
     /**
      * Genera un numero aleatorio hasta encontrar uno que no tenga
