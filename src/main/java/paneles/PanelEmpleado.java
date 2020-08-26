@@ -61,6 +61,11 @@ public class PanelEmpleado extends javax.swing.JPanel {
         });
 
         btnPedidos1.setText("Ventas");
+        btnPedidos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidos1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,6 +114,11 @@ public class PanelEmpleado extends javax.swing.JPanel {
        PanelPedidos panel = new PanelPedidos();
        MenuPrincipal.cargarPanel(panel);
     }//GEN-LAST:event_btnPedidosActionPerformed
+
+    private void btnPedidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidos1ActionPerformed
+       PanelCompra panel = new PanelCompra();
+       MenuPrincipal.cargarPanel(panel);
+    }//GEN-LAST:event_btnPedidos1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

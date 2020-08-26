@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.runtime.JSType;
 import registros.RegistroDatos;
 import registros.RegistroPedido;
 import registros.RegistroSubPedido;
@@ -27,6 +26,7 @@ import registros.RegistroSubPedido;
  */
 public class PanelCrearPedido extends javax.swing.JPanel {
     ArrayList<Subpedido> subpedidos = new ArrayList();
+    String codigoPedidoAux;
     /**
      * Creates new form PanelCrearPedido
      */
@@ -34,6 +34,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
         initComponents();
         cargarCodigosTiendas();
         cargarClientes();
+        generarCodigo();
     }
 
     /**
@@ -47,7 +48,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
         jLabel4 = new javax.swing.JLabel();
         lblTituloNuevaTienda = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtCancelar = new javax.swing.JButton();
         btnRegistrarTienda = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -60,7 +60,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
-        txtCodPedido = new javax.swing.JFormattedTextField();
         txtAnticipo = new javax.swing.JFormattedTextField();
         boxCodTiendaDestino = new javax.swing.JComboBox<>();
         boxCodTiendaOrigen = new javax.swing.JComboBox<>();
@@ -74,8 +73,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
         lblTituloNuevaTienda.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lblTituloNuevaTienda.setText("INGRESO NUEVO PEDIDO");
-
-        jLabel2.setText("*Cod. Pedido:");
 
         txtCancelar.setText("Cancelar");
         txtCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,8 +112,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
 
         lblPrecio.setText("0.00");
 
-        txtCodPedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
         txtAnticipo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter((DecimalFormat)NumberFormat.getNumberInstance(Locale.US))));
 
         boxCodTiendaOrigen.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +133,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(245, 245, 245)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
                     .addComponent(jLabel6)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
@@ -151,7 +145,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistrarTienda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTituloNuevaTienda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCodPedido)
                     .addComponent(txtAnticipo)
                     .addComponent(boxCodTiendaDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(boxCodTiendaOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -163,33 +156,28 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(lblTituloNuevaTienda))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(170, 170, 170))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(txtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(78, 78, 78)))
-                                .addComponent(jLabel10)))
+                                .addGap(8, 8, 8)
+                                .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(170, 170, 170))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(78, 78, 78)))
+                        .addComponent(jLabel10)
                         .addGap(0, 3, Short.MAX_VALUE))
                     .addComponent(txtCreditoAUsar)
                     .addComponent(txtNIT, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(289, 289, 289))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTituloNuevaTienda)
+                .addGap(355, 355, 355))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(70, 70, 70)
                 .addComponent(lblTituloNuevaTienda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAnticipo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -234,13 +222,16 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCancelar)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private void generarCodigo(){
+        RegistroPedido rp = new RegistroPedido();
+        codigoPedidoAux = String.valueOf(rp.generarCodAleatorio());
+    }
     private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
-        PanelEmpleado panelEmpleado = new PanelEmpleado();
-        MenuPrincipal.cargarPanel(panelEmpleado);
+        PanelPedidos pp = new PanelPedidos();
+        MenuPrincipal.cargarPanel(pp);
     }//GEN-LAST:event_txtCancelarActionPerformed
 
     private void btnRegistrarTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTiendaActionPerformed
@@ -254,7 +245,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                 try{//Se verifica si el pedido se registro  
                     RegistroDatos regAux = new RegistroDatos();//Le agregamos la suborden
                     ArrayList<String> datos = new ArrayList();
-                    datos.add(toString().valueOf(txtCodPedido.getText()));
+                    datos.add(codigoPedidoAux);
                     
                     if(regAux.verificarExistenciaRegisgtro("SELECT codigo_pedido FROM Pedido WHERE codigo_pedido = ?", datos)){
                         //Si el registro se hizo de forma correcta cerramos el panel y nos pasamos a otro
@@ -284,7 +275,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
      * @return 
      */
     private void registrarPedido(){
-        Pedido entidadAux = new Pedido(txtCodPedido.getText(), lblPrecio.getText(), "EN TRANSITO", MenuPrincipal.getFecha(),
+        Pedido entidadAux = new Pedido(codigoPedidoAux, lblPrecio.getText(), "EN TRANSITO", MenuPrincipal.getFecha(),
                 txtAnticipo.getText(), String.valueOf(boxCodTiendaOrigen.getSelectedItem()),  String.valueOf(boxCodTiendaDestino.getSelectedItem()), 
                 String.valueOf(txtNIT.getSelectedItem()), txtCreditoAUsar.getText());
         //Revisamos los campos obligatorios, si están llenos o vacíos
@@ -385,7 +376,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
         //Los datos devueltos por la funcion son
         //pos 0: Cantidad del producto 
         //pos 1: Precio del producto
-        if(txtCodPedido.getText().isEmpty() || txtCantidad.getText().isEmpty()){
+        if(txtCantidad.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Rellene todos los formularios");
         }else{
             cantidadYPrecio = rd.obtenerDatos("Producto", "cantidad, precio", " WHERE codigo_producto = '"+String.valueOf(boxCodProducto.getSelectedItem())+
@@ -399,7 +390,7 @@ public class PanelCrearPedido extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "El precio unitario del producto es de: "+cantidadYPrecio[1]+
                             "\nLa cantidad ingresada es de "+txtCantidad.getText()+
                             "\nEl subtotal es de "+subtotal);
-                    Subpedido auxsp = new Subpedido(txtCantidad.getText(), String.valueOf(subtotal), txtCodPedido.getText(), String.valueOf(boxCodProducto.getSelectedItem()));
+                    Subpedido auxsp = new Subpedido(txtCantidad.getText(), String.valueOf(subtotal), codigoPedidoAux, String.valueOf(boxCodProducto.getSelectedItem()));
                     subpedidos.add(auxsp);//Agregamos la entidad creada al arrayList
                     double aux = Double.parseDouble(lblPrecio.getText()) + subtotal;
                     lblPrecio.setText(String.valueOf(aux));
@@ -473,7 +464,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -486,7 +476,6 @@ public class PanelCrearPedido extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtAnticipo;
     private javax.swing.JButton txtCancelar;
     private javax.swing.JFormattedTextField txtCantidad;
-    private javax.swing.JFormattedTextField txtCodPedido;
     private javax.swing.JFormattedTextField txtCreditoAUsar;
     private javax.swing.JComboBox<String> txtNIT;
     // End of variables declaration//GEN-END:variables

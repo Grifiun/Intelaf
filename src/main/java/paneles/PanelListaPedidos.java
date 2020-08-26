@@ -26,6 +26,7 @@ import javax.swing.table.TableRowSorter;
 import registros.RegistroDatos;
 import registros.RegistroPedidoYSubPedido;
 import registros.RegistroTiempo;
+import exportado_de_tabla.ExportarTabla;
 
 /**
  *
@@ -67,6 +68,7 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtTienda = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        btnExportar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("LISTA DE PEDIDOS");
@@ -79,7 +81,7 @@ public class PanelListaPedidos extends javax.swing.JPanel {
             }
         });
 
-        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los pedidos por llegar", "Pedidos por verificar ingreso", "Pedidos que llegaran con retraso", "Pedidos salientes en tránsito", "Pedidos recibidos sin recoger" }));
+        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los pedidos por llegar", "Pedidos por verificar ingreso", "Pedidos  con retraso", "Pedidos salientes en tránsito", "Pedidos recibidos sin recoger" }));
         boxEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxEstadoActionPerformed(evt);
@@ -105,6 +107,13 @@ public class PanelListaPedidos extends javax.swing.JPanel {
 
         jLabel9.setText("Tienda:");
 
+        btnExportar.setText("Exportar HTML");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,7 +125,9 @@ public class PanelListaPedidos extends javax.swing.JPanel {
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(162, 162, 162)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(165, 165, 165)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(boxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,26 +141,27 @@ public class PanelListaPedidos extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(2, 2, 2)
-                        .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
+                        .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9)))
+                        .addComponent(jLabel9))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnRegresar)
                     .addComponent(boxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(btnExportar))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -212,6 +224,13 @@ public class PanelListaPedidos extends javax.swing.JPanel {
         }
        
     }//GEN-LAST:event_txtTiendaActionPerformed
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        //instanciamos el exportador de datos
+        ExportarTabla exportar = new ExportarTabla(tablaAux, nombreColumnas, String.valueOf(boxEstado.getSelectedItem()));
+        //exportamos
+        exportar.exportar();
+    }//GEN-LAST:event_btnExportarActionPerformed
     /**
      * Funcion que actualizara la tabla con la informacion
      * de la tabla elegida
@@ -321,6 +340,7 @@ public class PanelListaPedidos extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxEstado;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
