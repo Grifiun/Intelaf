@@ -87,7 +87,7 @@ public class PanelReportesVentas extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         jLabel1.setText("REPORTES VENTAS");
 
-        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4.5 Compras de un Cliente", "4.7 10 Productos mas vendidos", "4.8 Productos mas vendidos por tienda", "4.9 Productos sin vender por tienda", " " }));
+        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4.5  - Compras de un Cliente", "4.7  - 10 Productos mas vendidos", "4.8  - Productos mas vendidos por tienda", "4.9  - Productos sin vender por tienda", " " }));
         boxEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxEstadoActionPerformed(evt);
@@ -250,7 +250,17 @@ public class PanelReportesVentas extends javax.swing.JPanel {
     
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         //instanciamos el exportador de datos
-        ExportarTabla exportar = new ExportarTabla(tablaAux, columnas[boxEstado.getSelectedIndex()], String.valueOf(boxEstado.getSelectedItem()));
+        String encabezado = "REPORTE - "+String.valueOf(boxEstado.getSelectedItem())+" - ";
+        if(boxEstado.getSelectedIndex() == 0){
+            encabezado = encabezado + " Del Cliente con NIT "+String.valueOf(boxNIT.getSelectedItem());
+        }else if(boxEstado.getSelectedIndex() >= 1){
+            encabezado = encabezado + " En el intervalo de tiempo "+MenuPrincipal.getFecha()+ " Y "+MenuPrincipal.getFecha2();
+            if(boxEstado.getSelectedIndex() >= 2){
+                encabezado = encabezado + "en la tienda con codigo "+String.valueOf(boxCodTienda.getSelectedItem());            
+            }
+            
+        }
+        ExportarTabla exportar = new ExportarTabla(tablaAux, columnas[boxEstado.getSelectedIndex()], String.valueOf(boxEstado.getSelectedItem()), encabezado);
         //exportamos
         exportar.exportar();
     }//GEN-LAST:event_btnExportarActionPerformed

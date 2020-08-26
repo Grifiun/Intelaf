@@ -18,6 +18,7 @@ public class ExportarTabla {
     private JTable tabla;
     private String[] tituloColumnas;
     private String tituloRegistro;
+    private String encabezado;
     private String style = "<style>\n" +
                             "html {\n" +
                             "  font-family: sans-serif;\n" +
@@ -90,10 +91,11 @@ public class ExportarTabla {
                             "  border-color: #fbfcfc;\n" +
                             "}"
                             +"</style>";
-    public ExportarTabla(JTable tabla, String[] tituloColumnas, String tituloRegistro) {
+    public ExportarTabla(JTable tabla, String[] tituloColumnas, String tituloRegistro, String encabezado) {
         this.tabla = tabla;
         this.tituloColumnas = tituloColumnas;
         this.tituloRegistro = tituloRegistro;
+        this.encabezado = encabezado;
     }
         
     public void exportar() {
@@ -109,6 +111,11 @@ public class ExportarTabla {
                                 +"\n<title>\n"
                                     +tituloRegistro
                                 +"\n</title>"
+                                +"\n<header align=\"center\">\n"
+                                    +"\n<h2>\n"
+                                    +encabezado
+                                    +"\n</h2>"
+                                +"\n</header>"
                                 +style
                                 +"<meta charset=\"UTF-8\">"
                             +"\n</head>"
